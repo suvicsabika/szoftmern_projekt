@@ -1,0 +1,2 @@
+# szoftmern_projekt
+Szoftverfejlesztés mérnököknek projekt
