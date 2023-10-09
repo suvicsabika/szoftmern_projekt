@@ -26,6 +26,7 @@ public class TestTrackDriver {
         assertEquals(Timestamp.valueOf("2023-10-08 16:42:40.748"), truckDriver.getFuvarKezdet());
         assertEquals(Timestamp.valueOf("2023-10-08 16:42:40.748"), truckDriver.getFuvarVege());
         assertEquals(Time.valueOf("01:30:00"), truckDriver.getFuvarIdo());
+
         assertEquals(Time.valueOf("00:30:00"), truckDriver.getPihenoStop());
         assertEquals(true, truckDriver.getPihen());
         assertEquals("Example Cargo", truckDriver.getSzallitmany());
