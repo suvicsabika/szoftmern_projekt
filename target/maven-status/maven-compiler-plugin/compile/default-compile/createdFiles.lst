@@ -1,3 +1,4 @@
+hu\szoftmern\project\controller\TruckDriverController.class
 hu\szoftmern\project\model\TruckDriver.class
 hu\szoftmern\project\repository\TruckDriverRepository.class
 hu\szoftmern\project\service\TruckDriverService.class
