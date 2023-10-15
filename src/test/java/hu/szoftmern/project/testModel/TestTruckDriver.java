@@ -7,7 +7,7 @@ import hu.szoftmern.project.model.TruckDriver;
 import java.sql.Time;
 import java.sql.Timestamp;
 
-public class TestTrackDriver {
+public class TestTruckDriver {
 
 
     @Test
