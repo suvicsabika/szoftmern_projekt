@@ -9,22 +9,22 @@ export default function MyNavbar() {
     <Navbar shouldHideOnScroll id="navbar">
       <NavbarBrand>
         <AcmeLogo />
-        <Link href="../" color="foreground"><p className="font-bold text-inherit">Szoft. Mérn. Projekt</p></Link>
+        <Link href="../" color="foreground"><p className="text-inherit" id="main-link">Szoft. Mérn. Projekt</p></Link>
       </NavbarBrand>
 
       <NavbarContent className=" sm:flex gap-4" justify="center">
-        <NavbarItem id="nyilvantartas">
-          <Link href="Records" color="foreground">
+        <NavbarItem>
+          <Link href="Records" color="foreground" id="nyilvantartas">
             Nyilvántartás
           </Link>
         </NavbarItem>
-        <NavbarItem isActive id="kezdooldal">
-          <Link href="./Home" aria-current="page">
+        <NavbarItem isActive>
+          <Link href="./Home" aria-current="page" id="nyilvantartas"> 
             Kezdőoldal
           </Link>
         </NavbarItem>
-        <NavbarItem id="leiras">
-          <Link href="./About" color="foreground">
+        <NavbarItem>
+          <Link href="./About" color="foreground" id="nyilvantartas">
             Leírás
           </Link>
         </NavbarItem>
@@ -32,10 +32,10 @@ export default function MyNavbar() {
 
       <NavbarContent justify="end">
         <NavbarItem className=" lg:flex">
-          <Link href="./Login">Bejelentkezés</Link>
+          <Link href="./Login" id="login">Bejelentkezés</Link>
         </NavbarItem>
         <NavbarItem>
-          <Button as={Link} color="primary" href="./Register" variant="flat">
+          <Button as={Link} color="primary" href="./Register" variant="flat" id="register">
             Regisztráció
           </Button>
         </NavbarItem>
