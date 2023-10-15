@@ -17,16 +17,12 @@ public class Freight {
     private Timestamp startTime;
     private Timestamp arrivalTime;
 
-//    @ManyToOne
-//    @JoinColumn(name = "driver_id")
-//    private Driver driver;
-
     public Freight() {
     }
 
     public Freight(Long freightId, Long driverId, String origin, String destination, String cargo, Timestamp startTime, Timestamp arrivalTime) {
         this.freightId = freightId;
-        //this.driverId = driverId;
+        this.driverId = driverId;
         this.origin = origin;
         this.destination = destination;
         this.cargo = cargo;
@@ -90,20 +86,13 @@ public class Freight {
         this.arrivalTime = arrivalTime;
     }
 
-//    public Driver getDriver() {
-//        return driver;
-//    }
-//
-//    public void setDriver(Driver driver) {
-//        this.driver = driver;
-//    }
+
 
     @Override
     public String toString() {
         return "Freight{" +
                 "freightId=" + freightId +
                 " driverId= " + driverId +
-                //" driver=" + driver +
                 ", origin='" + origin + '\'' +
                 ", destination='" + destination + '\'' +
                 ", cargo='" + cargo + '\'' +
