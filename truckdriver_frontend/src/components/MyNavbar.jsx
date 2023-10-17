@@ -1,4 +1,5 @@
 import React from "react";
+
 import { Navbar, NavbarBrand, NavbarContent, NavbarItem, Link, Button } from "@nextui-org/react";
 import { AcmeLogo } from "./AcmeLogo.jsx";
 
@@ -19,12 +20,12 @@ export default function MyNavbar() {
           </Link>
         </NavbarItem>
         <NavbarItem isActive>
-          <Link href="./Home" aria-current="page" id="nyilvantartas"> 
+          <Link href="./Home" aria-current="page" id="kezdooldal"> 
             Kezdőoldal
           </Link>
         </NavbarItem>
         <NavbarItem>
-          <Link href="./About" color="foreground" id="nyilvantartas">
+          <Link href="./About" color="foreground" id="leiras">
             Leírás
           </Link>
         </NavbarItem>

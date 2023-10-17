@@ -1,4 +1,9 @@
 #navbar {
-   /* background-color: #06B7DB;*/
+    background-color: #4A4A4C;
+    font-weight: normal;
+}
+
+#nyilvantartas, #main-link, #nyilvantartas, #leiras {
+    color: #00FFFF;
     font-weight: normal;
 }
