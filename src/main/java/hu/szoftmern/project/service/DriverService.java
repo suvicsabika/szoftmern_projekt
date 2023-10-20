@@ -1,4 +1,4 @@
-package hu.szoftmern.project.service;
+/*package hu.szoftmern.project.service;
 
 import hu.szoftmern.project.model.Driver;
 import hu.szoftmern.project.repository.DriverRepository;
@@ -24,3 +24,4 @@ public class DriverService {
     }
 }
 
+*/

@@ -15,12 +15,12 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/driver/",
+							"raw": "http://localhost:8081/driver/",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "8080",
+							"port": "8081",
 							"path": [
 								"driver",
 								""
@@ -35,12 +35,12 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/driver/1",
+							"raw": "http://localhost:8081/driver/1",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "8080",
+							"port": "8081",
 							"path": [
 								"driver",
 								"1"
@@ -64,12 +64,12 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/driver/",
+							"raw": "http://localhost:8081/driver/",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "8080",
+							"port": "8081",
 							"path": [
 								"driver",
 								""
@@ -84,12 +84,12 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/driver/1",
+							"raw": "http://localhost:8081/driver/1",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "8080",
+							"port": "8081",
 							"path": [
 								"driver",
 								"1"
@@ -119,12 +119,12 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/driver/1",
+							"raw": "http://localhost:8081/driver/1",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "8080",
+							"port": "8081",
 							"path": [
 								"driver",
 								"1"
@@ -144,12 +144,12 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/freight/",
+							"raw": "http://localhost:8081/freight/",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "8080",
+							"port": "8081",
 							"path": [
 								"freight",
 								""
@@ -164,12 +164,12 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/freight/1",
+							"raw": "http://localhost:8081/freight/1",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "8080",
+							"port": "8081",
 							"path": [
 								"freight",
 								"1"
@@ -199,12 +199,12 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/freight/",
+							"raw": "http://localhost:8081/freight/",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "8080",
+							"port": "8081",
 							"path": [
 								"freight",
 								""
@@ -219,12 +219,12 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/freight/1",
+							"raw": "http://localhost:8081/freight/1",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "8080",
+							"port": "8081",
 							"path": [
 								"freight",
 								"1"
@@ -249,12 +249,12 @@
 							"raw": "{\r\n    \"origin\": \"Origin Location\",\r\n    \"driverId\": 1,\r\n    \"destination\": \"New Destination Location\",\r\n    \"cargo\": \"Cargo Description\",\r\n    \"startTime\": \"2023-10-08T16:42:40.748+00:00\",\r\n    \"arrivalTime\": \"2023-10-09T16:42:40.748+00:00\"\r\n}\r\n"
 						},
 						"url": {
-							"raw": "http://localhost:8080/freight/1",
+							"raw": "http://localhost:8081/freight/1",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "8080",
+							"port": "8081",
 							"path": [
 								"freight",
 								"1"
@@ -274,12 +274,12 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/freight/by-driver/1",
+							"raw": "http://localhost:8081/freight/by-driver/1",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "8080",
+							"port": "8081",
 							"path": [
 								"freight",
 								"by-driver",

@@ -1,8 +1,7 @@
 package hu.szoftmern.project.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-
-import java.util.List;
 
 @Entity
 public class Driver {
@@ -12,6 +11,10 @@ public class Driver {
     private String name;
     private String phoneNumber;
     private String address;
+    @OneToOne
+    @JoinColumn(name = "user_id")
+    @JsonIgnore
+    private User user;
     public Driver() {
     }
 
@@ -52,6 +55,14 @@ public class Driver {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     @Override

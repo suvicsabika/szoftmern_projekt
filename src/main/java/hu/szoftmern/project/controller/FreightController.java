@@ -43,12 +43,11 @@ public class FreightController {
         return ResponseEntity.ok(freights);
     }
 
-
-
     @PostMapping("/")
     public ResponseEntity<Freight> createFreight(@RequestBody Freight freight) {
         Long driverId = freight.getDriverId();
         Driver driver = driverRepository.findById(driverId)
+                //Own Exception class
                 .orElseThrow(() -> new ResourceNotFoundException("Driver", "driverId", driverId));
 
         freight.setDriverId(driverId);

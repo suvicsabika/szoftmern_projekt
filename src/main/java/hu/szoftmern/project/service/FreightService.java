@@ -1,4 +1,4 @@
-package hu.szoftmern.project.service;
+/*package hu.szoftmern.project.service;
 
 import hu.szoftmern.project.model.Freight;
 import hu.szoftmern.project.repository.FreightRepository;
@@ -28,3 +28,4 @@ public class FreightService {
         return freightRepository.findByDriverId(driverId);
     }
 }
+*/
