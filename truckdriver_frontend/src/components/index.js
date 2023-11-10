@@ -1,1 +1,0 @@
-export { default as MyNavbar } from './MyNavbar/MyNavbar';
