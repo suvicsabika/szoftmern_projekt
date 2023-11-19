@@ -1,6 +1,7 @@
 package hu.szoftmern.project.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
@@ -14,10 +15,9 @@ import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Service;
 
-
 @Service
+@PropertySource("classpath:/email.properties")
 public class EmailService {
-
     private JavaMailSender javaMailSender;
     private static final String myEmail = "noreply.trucksystem@gmail.com";
 
@@ -41,12 +41,23 @@ public class EmailService {
 
         SimpleMailMessage message = new SimpleMailMessage();
         message.setTo(to);
-        message.setSubject(emailSubject);
-        message.setText(templateBody);
+        if (customSubject == null) {
+            message.setSubject(emailSubject);
+        }
+        else {
+            message.setSubject(customSubject);
+        }
+
+        if (customBody == null) {
+            message.setText(templateBody);
+        }
+        else {
+            message.setText(customBody);
+        }
+
         message.setFrom(myEmail);
         message.setReplyTo(myEmail);
 
-        // Modified: Use the javaMailSender field instead of the parameter
         javaMailSender.send(message);
 
         System.out.println("Email Sent Successfully!!");
