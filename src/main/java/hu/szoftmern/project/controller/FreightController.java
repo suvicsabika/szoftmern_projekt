@@ -14,6 +14,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/freight")
+@CrossOrigin(origins = "http://localhost:3000")
 public class FreightController {
 
     private final FreightRepository freightRepository;

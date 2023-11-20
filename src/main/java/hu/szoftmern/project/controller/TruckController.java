@@ -11,6 +11,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/truck")
+@CrossOrigin(origins = "http://localhost:3000")
 public class TruckController {
     private final TruckRepository truckRepository;
 
