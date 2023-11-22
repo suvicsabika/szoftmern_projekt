@@ -4,9 +4,6 @@ import "./Login.css";
 import { NextUIProvider /*Input*/  } from "@nextui-org/react";
 import MyNavbar from "../../components/MyNavbar";
 
-/*import { EyeFilledIcon } from "./EyeFilledIcon";
-import { EyeSlashFilledIcon } from "./EyeSlashFilledIcon";}*/
-
 export default function Login() {
     const [errorMessages, setErrorMessages] = useState({});
     const [isSubmitted, setIsSubmitted] = useState(false);
@@ -72,25 +69,7 @@ export default function Login() {
                     {renderErrorMessage("uname")}
                 </div>
                 <div className="input-container">
-                    <label >Jelszó </label>
-
-                    {/*<Input 
-                        label="Jelszó"
-                        variant="bordered"
-                        placeholder="Add meg a jelszavad"
-                        endContent={
-                            <button className="focus:outline-none" type="button" onClick={toggleVisibility}>
-                                {isVisible ? (
-                                    <EyeSlashFilledIcon className="text-2xl text-default-400 pointer-events-none" />
-                                ) : (
-                                    <EyeFilledIcon className="text-2xl text-default-400 pointer-events-none" />
-                                )}
-                            </button>
-                        }
-                        type={isVisible ? "text" : "password"}
-                        className="max-w-xs"
-                    /> {/*lehetseges hogy ez lesz*/}
-                    
+                    <label >Jelszó </label>                    
                     <input type="password" name="pass" required />
                     {renderErrorMessage("pass")}
                 </div>
