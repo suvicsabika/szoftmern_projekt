@@ -11,9 +11,13 @@ export default function Login() {
 
   const database = [
     {
-      uname: "admin",
-      pass: "admin"
-    }
+      uname: "user1",
+      pass: "pass1"
+  },
+  {
+      uname: "user2",
+      pass: "pass2"
+  }
   ];
 
   const errors = {
@@ -58,14 +62,12 @@ export default function Login() {
     );
 
   const renderForm = (
-    <div className="container mt-4">
-
-
-      <div className="form m-5">
-        <form onSubmit={handleSubmit}>
-          <h3>Bejelentkezés</h3>
+    <div className="container mt-4 pt-5">
+      <div className="form d-flex justify-content-center pt-5">
+        <form className="border border-info-subtle border-3 p-5" onSubmit={handleSubmit}>
+          <h3 className="text-center pb-3">Bejelentkezés</h3>
           <div className="mb-3">
-            <label>Felhasználónév</label>
+            <label >Felhasználónév</label>
             <input
               type="text"
               className="form-control"
@@ -90,10 +92,10 @@ export default function Login() {
 
           <div className="d-grid">
             <button type="submit" className="btn btn-primary">
-              Submit
+              Küldés
             </button>
           </div>
-          <p className="forgot-password text-right">
+          <p className="forgot-password text-right mt-3">
             Nincs még fiókja? <Link to={"/Register"}>Regisztráljon egyet!</Link>
           </p>
         </form>

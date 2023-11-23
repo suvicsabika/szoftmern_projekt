@@ -28,7 +28,7 @@ export default function MyNavbar() {
                             </li>
                         </ul>
                         {
-                            auth === "admin" ?
+                            auth ?
                                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                                         <li class="nav-item top-0">
@@ -36,6 +36,7 @@ export default function MyNavbar() {
                                         </li>
 
                                     </ul>
+                                    <h className="pe-3">Üdvözöllek, {auth}</h>
                                     <form class="d-flex">
                                         <Link class="btn btn-primary me-2" type="submit" onClick={logout} to={"/home"}>Kijelentkezés</Link>
                                     </form>
