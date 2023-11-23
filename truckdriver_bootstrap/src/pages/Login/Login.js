@@ -13,16 +13,19 @@ export default function Login() {
     {
       uname: "user1",
       pass: "pass1"
-  },
-  {
+    },
+    {
       uname: "user2",
       pass: "pass2"
-  }
+    },
+    {
+      uname: "admin",
+      pass: "admin"
+    }
   ];
 
   const errors = {
-    uname: "Helytelen felhasználónév",
-    pass: "Helytelen jelszó"
+    pass: "Helytelen belépési adatok!"
   };
 
   const handleSubmit = (event) => {
@@ -32,22 +35,13 @@ export default function Login() {
     const uname = data.get("uname");
     const pass = data.get("pass");
 
-    const userUname = database.find((user) => user.uname === uname);
-    const userPass = database.find((user) => user.pass === pass);
-    const isValidPass = userPass && userPass.pass === pass;
-    const isValidUname = userUname && userUname.uname === uname;
+    const user = database.find((user) => user.pass === pass);
+    const isValid = user && user.pass === pass;
 
-    if (!isValidPass) {
+    if (!isValid) {
       setErrorMessages({
         name: "pass",
         message: errors.pass
-      });
-      return;
-    }
-    if (!isValidUname) {
-      setErrorMessages({
-        name: "uname",
-        message: errors.uname
       });
       return;
     }
@@ -71,12 +65,11 @@ export default function Login() {
             <input
               type="text"
               className="form-control"
-              
+
               name="uname"
               placeholder="Felhasználónév"
               required
             />
-            {renderErrorMessage("uname")}
           </div>
           <div className="mb-3">
             <label>Jelszó</label>

@@ -20,8 +20,8 @@ import java.util.Optional;
 
 
 @RestController
-@RequestMapping("/driver")
 @CrossOrigin(origins = "http://localhost:3000")
+@RequestMapping(value="/driver")
 public class DriverAndUserController {
 
     private final DriverRepository driverRepository;
