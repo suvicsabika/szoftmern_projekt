@@ -1,3 +1,5 @@
+// TruckController: Kezeli a teherautókkal kapcsolatos HTTP kéréseket.
+
 package hu.szoftmern.project.controller;
 
 import hu.szoftmern.project.model.Driver;
@@ -16,16 +18,19 @@ public class TruckController {
     private final TruckRepository truckRepository;
 
     private final DriverRepository driverRepository;
+    // Konstruktor: Inicializálja a TruckRepository-t és a DriverRepository-t.
     public TruckController(TruckRepository truckRepository, DriverRepository driverRepository) {
         this.truckRepository = truckRepository;
         this.driverRepository = driverRepository;
     }
 
+    // getAllTrucks: Lekéri az összes teherautót az adatbázisból.
     @GetMapping
     public List<Truck> getAllTrucks() {
         return truckRepository.findAll();
     }
 
+    // getTruckById: Egy adott azonosítójú teherautó lekérése.
     @GetMapping("/{id}")
     public ResponseEntity<Truck> getTruckById(@PathVariable Long id) {
         return truckRepository.findById(id)
@@ -33,6 +38,7 @@ public class TruckController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
+    // createTruck: Új teherautó létrehozása az adatbázisban.
     @PostMapping
     public ResponseEntity<Truck> createTruck(@RequestBody Truck truck) {
         Long driverId = truck.getDriverId();
@@ -46,6 +52,7 @@ public class TruckController {
         return ResponseEntity.ok(savedTruck);
     }
 
+    // updateTruck: Egy meglévő teherautó adatainak frissítése.
     @PutMapping("/{id}")
     public ResponseEntity<Truck> updateTruck(@PathVariable Long id, @RequestBody Truck updatedTruck) {
         return truckRepository.findById(id)
@@ -63,6 +70,7 @@ public class TruckController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
+    // deleteTruck: Egy adott azonosítójú teherautó törlése az adatbázisból.
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteTruck(@PathVariable Long id) {
         return truckRepository.findById(id)

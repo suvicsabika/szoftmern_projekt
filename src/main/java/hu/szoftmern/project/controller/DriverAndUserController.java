@@ -1,3 +1,5 @@
+// DriverAndUserController: Kezeli a sofőrökkel és felhasználókkal kapcsolatos kéréseket.
+
 package hu.szoftmern.project.controller;
 
 import hu.szoftmern.project.model.Driver;
@@ -32,6 +34,7 @@ public class DriverAndUserController {
         this.userRepository = userRepository;
     }
     //DONE
+    // getAllDrivers: Lekéri az összes sofőrt és a hozzájuk tartozó felhasználókat.
     @GetMapping(value = "/", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<UserDriverRequest>> getAllDrivers() {
         List<Driver> drivers = driverRepository.findAll();
@@ -49,6 +52,7 @@ public class DriverAndUserController {
         return ResponseEntity.ok(userDriverResponses);
     }
     //DONE
+    // getDriverById: Egy adott azonosítójú sofőrt és a hozzá tartozó felhasználót adja vissza.
     @GetMapping("{driverId}")
     public ResponseEntity<UserDriverRequest> getDriverById(@PathVariable Long driverId) {
         Optional<Driver> optionalDriver = driverRepository.findById(driverId);
@@ -71,6 +75,7 @@ public class DriverAndUserController {
         return ResponseEntity.ok(result);
     }
     //DONE
+    // createDriver: Új sofőr és a hozzá tartozó felhasználó létrehozása.
     @PostMapping("/")
     public ResponseEntity<String> createDriver(@RequestBody UserDriverRequest request) {
         try {
@@ -92,6 +97,7 @@ public class DriverAndUserController {
         return new ResponseEntity<>("The driver user has been created!", HttpStatus.CREATED);
     }
     //DONE
+    // deleteDriver: Egy adott azonosítójú sofőr és a hozzá tartozó felhasználó törlése.
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteDriver(@PathVariable Long id) {
         if (!driverRepository.existsById(id)) {
@@ -108,6 +114,7 @@ public class DriverAndUserController {
         return ResponseEntity.noContent().build();
     }
     //DONE
+    // updateDriver: Egy adott azonosítójú sofőr és a hozzá tartozó felhasználó adatainak frissítése.
     @PutMapping("/{id}")
     public ResponseEntity<String> updateDriver(@PathVariable Long id, @RequestBody UserDriverRequest updatedDriver) {
         if (!driverRepository.existsById(id)) {
