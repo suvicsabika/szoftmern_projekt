@@ -17,10 +17,12 @@ public class Freight {
     private Timestamp startTime;
     private Timestamp arrivalTime;
 
+    private double distance;
+
     public Freight() {
     }
 
-    public Freight(Long freightId, Long driverId, String origin, String destination, String cargo, Timestamp startTime, Timestamp arrivalTime) {
+    public Freight(Long freightId, Long driverId, String origin, String destination, String cargo, Timestamp startTime, Timestamp arrivalTime, double distance) {
         this.freightId = freightId;
         this.driverId = driverId;
         this.origin = origin;
@@ -28,6 +30,7 @@ public class Freight {
         this.cargo = cargo;
         this.startTime = startTime;
         this.arrivalTime = arrivalTime;
+        this.distance = distance;
     }
 
     public Long getFreightId() {
@@ -86,7 +89,9 @@ public class Freight {
         this.arrivalTime = arrivalTime;
     }
 
+    public double getDistance() {return distance;}
 
+    public void setDistance(double distance) {this.distance = distance;}
 
     @Override
     public String toString() {
@@ -98,6 +103,7 @@ public class Freight {
                 ", cargo='" + cargo + '\'' +
                 ", startTime=" + startTime +
                 ", arrivalTime=" + arrivalTime +
+                ", distance=" + distance +
                 '}';
     }
 }

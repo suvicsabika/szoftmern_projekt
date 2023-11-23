@@ -11,7 +11,7 @@ public class User {
     private String username;
     private String email;
     private String password;
-
+    private boolean isAdmin = false;
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JsonIgnore
     private Driver driver;
@@ -63,12 +63,17 @@ public class User {
         this.driver = driver;
     }
 
+    public boolean isAdmin() { return isAdmin; }
+
+    public void setAdmin(boolean admin) { isAdmin = admin; }
+
     @Override
     public String toString() {
         return "User{" +
                 "driverId=" + driverId +
                 ", username='" + username + '\'' +
                 ", email='" + email + '\'' +
+                ", isAdmin='" + isAdmin + '\'' +
                 '}';
     }
 }

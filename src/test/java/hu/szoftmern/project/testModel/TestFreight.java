@@ -15,7 +15,7 @@ public class TestFreight {
     public void setUp() {
         Timestamp startTime = Timestamp.valueOf("2023-10-08 16:42:40.748");
         Timestamp arrivalTime = Timestamp.valueOf("2023-10-09 20:20:40.148");
-        freight = new Freight(1L, 1L, "Ground", "Heaven", "Money",startTime,arrivalTime);
+        freight = new Freight(1L, 1L, "Ground", "Heaven", "Money",startTime,arrivalTime, 208.2);
     }
 
     @Test
