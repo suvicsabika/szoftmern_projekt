@@ -1,6 +1,6 @@
 package hu.szoftmern.project.model;
 
 public enum FuelType {
-    GASOLINE,
+    PETROL,
     DIESEL
 }

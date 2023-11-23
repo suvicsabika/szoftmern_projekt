@@ -11,6 +11,8 @@ public class Freight {
     private Long freightId;
     @Column(name = "driver_id")
     private Long driverId;
+
+    private Long vehicleId;
     private String origin;
     private String destination;
     private String cargo;
@@ -22,9 +24,10 @@ public class Freight {
     public Freight() {
     }
 
-    public Freight(Long freightId, Long driverId, String origin, String destination, String cargo, Timestamp startTime, Timestamp arrivalTime, double distance) {
+    public Freight(Long freightId, Long driverId, Long vehicleId, String origin, String destination, String cargo, Timestamp startTime, Timestamp arrivalTime, double distance) {
         this.freightId = freightId;
         this.driverId = driverId;
+        this.vehicleId = vehicleId;
         this.origin = origin;
         this.destination = destination;
         this.cargo = cargo;
@@ -93,11 +96,16 @@ public class Freight {
 
     public void setDistance(double distance) {this.distance = distance;}
 
+    public Long getVehicleId() { return vehicleId; }
+
+    public void setVehicleId(Long vehicleId) { this.vehicleId = vehicleId; }
+
     @Override
     public String toString() {
         return "Freight{" +
                 "freightId=" + freightId +
                 " driverId= " + driverId +
+                " vehicleId=" + vehicleId+ '\'' +
                 ", origin='" + origin + '\'' +
                 ", destination='" + destination + '\'' +
                 ", cargo='" + cargo + '\'' +
