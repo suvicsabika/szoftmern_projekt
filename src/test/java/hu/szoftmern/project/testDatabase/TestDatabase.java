@@ -9,11 +9,14 @@ import hu.szoftmern.project.repository.FreightRepository;
 
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.test.context.junit4.SpringRunner;
 
 import java.sql.Timestamp;
 
+@RunWith(SpringRunner.class)
 @DataJpaTest(properties = "spring.config.location=classpath:/all.properties")
 public class TestDatabase {
     @Autowired
@@ -22,9 +25,8 @@ public class TestDatabase {
     private DriverRepository driverRepository;
     @Autowired
     private FreightRepository freightRepository;
-
     @Test
-    void testUserEntityPersistence() {
+    public void testUserEntityPersistence() {
         // Create a new User instance
         User user = new User();
         user.setUsername("testUsername");

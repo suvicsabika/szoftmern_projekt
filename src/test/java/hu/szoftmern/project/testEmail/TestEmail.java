@@ -24,6 +24,6 @@ public class TestEmail {
 
     @Test
     public void testSendEmail() {
-        emailService.sendEmail("noreply.trucksystem@gmail.com", "test", "TEST!!!");
+        emailService.sendEmail("noreply.trucksystem@gmail.com", null, null);
     }
 }

@@ -24,7 +24,7 @@ public class EmailController {
     public ResponseEntity<String> sendEmail(@RequestBody @PathVariable Long driverId) {
         String driversEmail = String.valueOf(userRepository.getById(driverId).getEmail());
 
-        emailService.sendEmail(driversEmail, null, null);
+        emailService.sendEmail(driversEmail, "Your Upcoming Freights", null);
         return ResponseEntity.ok("Email sent successfully");
     }
 }

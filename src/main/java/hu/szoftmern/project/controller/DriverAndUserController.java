@@ -14,10 +14,8 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-
 
 @RestController
 @CrossOrigin(origins = "http://localhost:3000")
@@ -33,48 +31,47 @@ public class DriverAndUserController {
         this.driverRepository = driverRepository;
         this.userRepository = userRepository;
     }
-    //DONE
-    // getAllDrivers: Lekéri az összes sofőrt és a hozzájuk tartozó felhasználókat.
-    @GetMapping(value = "/", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<UserDriverRequest>> getAllDrivers() {
+    // getAllDrivers: Lekér és visszaadja az összes regisztrált sofőrt.
+    @GetMapping(value = "/drivers", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<Driver>> getAllDrivers() {
         List<Driver> drivers = driverRepository.findAll();
+        if (drivers.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.ok(drivers);
+    }
+
+    // getOneDriverById: Lekér és visszaadja az adott azonosítójú sofőrt.
+    @GetMapping(value = "/driverid:{driverId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Driver> getOneDriverById(@PathVariable Long driverId) {
+        Optional<Driver> driver = driverRepository.findById(driverId);
+        if (!driver.isPresent()) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(driver.get());
+    }
+
+    // getAllUsers: Lekér és visszaadja az összes regisztrált felhasználót.
+    @GetMapping(value = "/users", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<User>> getAllUsers() {
         List<User> users = userRepository.findAll();
-        List<UserDriverRequest> userDriverResponses = new ArrayList<>();
-
-        for (int i = 0; i < users.size(); i++) {
-            UserDriverRequest response = new UserDriverRequest();
-            response.setUser(users.get(i));
-            response.setDriver(drivers.get(i));
-
-            userDriverResponses.add(response);
+        if (users.isEmpty()) {
+            return ResponseEntity.noContent().build();
         }
-
-        return ResponseEntity.ok(userDriverResponses);
+        return ResponseEntity.ok(users);
     }
-    //DONE
-    // getDriverById: Egy adott azonosítójú sofőrt és a hozzá tartozó felhasználót adja vissza.
-    @GetMapping("{driverId}")
-    public ResponseEntity<UserDriverRequest> getDriverById(@PathVariable Long driverId) {
-        Optional<Driver> optionalDriver = driverRepository.findById(driverId);
 
-        if (optionalDriver.isEmpty()) {
+    // getOneUserById: Lekér és visszaadja az adott azonosítójú felhasználót.
+    @GetMapping(value = "/userid:{userId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<User> getOneUserById(@PathVariable Long userId) {
+        Optional<User> userOptional = userRepository.findById(userId);
+        if (!userOptional.isPresent()) {
             return ResponseEntity.notFound().build();
         }
 
-        Driver foundDriver = optionalDriver.get();
-        Optional<User> foundUser = userRepository.findById(driverId);
-
-        if (foundUser.isEmpty()) {
-            return ResponseEntity.notFound().build();
-        }
-
-        UserDriverRequest result = new UserDriverRequest();
-        result.setUser(foundUser.get());
-        result.setDriver(foundDriver);
-
-        return ResponseEntity.ok(result);
+        return ResponseEntity.ok(userOptional.get());
     }
-    //DONE
+
     // createDriver: Új sofőr és a hozzá tartozó felhasználó létrehozása.
     @PostMapping("/register")
     public ResponseEntity<String> createDriver(@RequestBody UserDriverRequest request) {
@@ -120,7 +117,8 @@ public class DriverAndUserController {
         }
     }
 
-    //DONE
+    
+
     // deleteDriver: Egy adott azonosítójú sofőr és a hozzá tartozó felhasználó törlése.
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteDriver(@PathVariable Long id) {
@@ -137,7 +135,6 @@ public class DriverAndUserController {
 
         return ResponseEntity.noContent().build();
     }
-    //DONE
     // updateDriver: Egy adott azonosítójú sofőr és a hozzá tartozó felhasználó adatainak frissítése.
     @PutMapping("/{id}")
     public ResponseEntity<String> updateDriver(@PathVariable Long id, @RequestBody UserDriverRequest updatedDriver) {

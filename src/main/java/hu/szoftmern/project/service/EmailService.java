@@ -6,63 +6,88 @@
 
 package hu.szoftmern.project.service;
 
+import hu.szoftmern.project.model.Driver;
+import hu.szoftmern.project.model.Freight;
+import hu.szoftmern.project.model.User;
+import hu.szoftmern.project.repository.DriverRepository;
+import hu.szoftmern.project.repository.FreightRepository;
+import hu.szoftmern.project.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
-import java.util.Date;
-
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.core.io.ClassPathResource;
-import org.springframework.core.io.Resource;
-import org.springframework.stereotype.Service;
+import java.util.List;
+import java.util.Optional;
 
 // EmailService: E-mail küldési szolgáltatásokat nyújtó osztály.
 @Service
-@PropertySource("classpath:/email.properties")
 public class EmailService {
     private JavaMailSender javaMailSender;
     private static final String myEmail = "noreply.trucksystem@gmail.com";
+    private final UserRepository userRepository;
+    private final DriverRepository driverRepository;
+    private final FreightRepository freightRepository;
 
-    @Value("${email.subject}")
-    private String emailSubject;
-
-    @Value("${email.body}")
-    private String emailBodyTemplate;
+    private static String customBody = """
+            Hello {name},
+            
+            This is to inform you about a new freight assignment. Details are as follows:
+            {details}
+            Please be prepared and ensure that you are ready for the upcoming assignment.
+            Best regards,
+            TruckSystem
+                        
+            """;
 
     // Konstruktor: Inicializálja a JavaMailSender-t.
     @Autowired
-    public EmailService(JavaMailSender javaMailSender) {
+    public EmailService(JavaMailSender javaMailSender, UserRepository userRepository, DriverRepository driverRepository, FreightRepository freightRepository) {
         this.javaMailSender = javaMailSender;
+        this.userRepository = userRepository;
+        this.driverRepository = driverRepository;
+        this.freightRepository = freightRepository;
     }
 
     // sendEmail: Elküld egy e-mailt a megadott címzettnek.
-    public void sendEmail(String to, String customSubject, String customBody) {
-        // New:
-        String templateBody = emailBodyTemplate
-                .replace("{name}", "customName")
-                .replace("{event}", "customEvent")
-                .replace("{date}", "customDate");
+    public void sendEmail(String to, String customSubject, String customParamBody) {
+        Optional<User> user = userRepository.findByEmail(to);
+        Optional<Driver> driver = null;
+        System.out.println(user);
+        if (user.isPresent()) {
+            driver = driverRepository.findById(user.get().getDriverId());
+        }
+        System.out.println(driver);
+        if (driver != null && driver.isPresent()) {
+            Driver actualDriver = driver.get();
+            List<Freight> actualFreights = freightRepository.findByDriverId(driver.get().getDriverId());
+
+            StringBuilder freightDetails = new StringBuilder();
+
+            for (Freight freight : actualFreights) {
+                System.out.println(freight);
+                freightDetails.append("Freight ID: ").append(freight.getFreightId()).append("\n");
+                freightDetails.append("Cargo: ").append(freight.getCargo()).append("\n");
+                freightDetails.append("Origin: ").append(freight.getOrigin()).append("\n");
+                freightDetails.append("Destination: ").append(freight.getDestination()).append("\n");
+                freightDetails.append("Start Time: ").append(freight.getStartTime()).append("\n");
+                freightDetails.append("Arrival Time: ").append(freight.getArrivalTime()).append("\n\n");
+            }
+
+            // Replace placeholders in the email body
+            customBody = customBody.replace("{name}", actualDriver.getName())
+                    .replace("{event}", "Freight Details")
+                    .replace("{date}", "") // You may want to replace this with a specific date
+                    .replace("{details}", freightDetails.toString());
+        } else {
+            System.out.println("Couldn't find the Driver!");
+        }
 
         SimpleMailMessage message = new SimpleMailMessage();
         message.setTo(to);
-        if (customSubject == null) {
-            message.setSubject(emailSubject);
-        }
-        else {
-            message.setSubject(customSubject);
-        }
-
-        if (customBody == null) {
-            message.setText(templateBody);
-        }
-        else {
-            message.setText(customBody);
-        }
+        message.setSubject(customSubject);
+        message.setText(customBody);
 
         message.setFrom(myEmail);
         message.setReplyTo(myEmail);
