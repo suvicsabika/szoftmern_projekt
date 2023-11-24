@@ -76,7 +76,7 @@ public class DriverAndUserController {
     }
     //DONE
     // createDriver: Új sofőr és a hozzá tartozó felhasználó létrehozása.
-    @PostMapping("/")
+    @PostMapping("/register")
     public ResponseEntity<String> createDriver(@RequestBody UserDriverRequest request) {
         try {
             User user = request.getUser();
@@ -96,6 +96,30 @@ public class DriverAndUserController {
         }
         return new ResponseEntity<>("The driver user has been created!", HttpStatus.CREATED);
     }
+
+    @PostMapping("/login/")
+    public ResponseEntity<String> loginDriver(@RequestBody User user) {
+        if (user == null || user.getUsername() == null || user.getPassword() == null) {
+            return new ResponseEntity<>("Invalid login credentials.", HttpStatus.BAD_REQUEST);
+        }
+
+        String username = user.getUsername();
+        String password = user.getPassword();
+
+        Optional<User> optionalUser = userRepository.findByUsername(username);
+
+        if (optionalUser.isPresent()) {
+            User storedUser = optionalUser.get();
+            if (storedUser.checkPassword(password)) {
+                return ResponseEntity.ok("Login successful");
+            } else {
+                return new ResponseEntity<>("Invalid login credentials.", HttpStatus.UNAUTHORIZED);
+            }
+        } else {
+            return new ResponseEntity<>("Invalid login credentials.", HttpStatus.UNAUTHORIZED);
+        }
+    }
+
     //DONE
     // deleteDriver: Egy adott azonosítójú sofőr és a hozzá tartozó felhasználó törlése.
     @DeleteMapping("/{id}")

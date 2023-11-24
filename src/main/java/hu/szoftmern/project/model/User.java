@@ -50,6 +50,8 @@ public class User {
         this.email = email;
     }
 
+    public String getPassword() { return password; }
+
     //TODO: Encryption here!
     public void setPassword(String password) {
         this.password = password;
@@ -67,6 +69,10 @@ public class User {
 
     public void setAdmin(boolean admin) { isAdmin = admin; }
 
+
+    public boolean checkPassword(String password) {
+        return this.password.equals(password);
+    }
     @Override
     public String toString() {
         return "User{" +
