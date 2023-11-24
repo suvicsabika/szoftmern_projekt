@@ -24,7 +24,7 @@ export default function EditPerson() {
             className='border border-info-subtle border-3 p-5 shadow'
             onSubmit={async (e) => {
               e.preventDefault();
-              await axios.post("http://localhost:8081/driver/", driver);
+              await axios.post("http://localhost:8081/driver/register", driver);
               navigate('/records');
             }}>
           <h1 className='text-center'>Add Driver</h1>

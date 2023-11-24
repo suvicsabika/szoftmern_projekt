@@ -21,7 +21,7 @@ export default function Login() {
   }, []);
 
   const loadUsers = async () => {
-    const result = await axios.get('http://localhost:8081/driver/');
+    const result = await axios.get('http://localhost:8081/driver/users');
       
     setUsers(result.data)
     console.log(result.data)

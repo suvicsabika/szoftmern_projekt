@@ -4,13 +4,13 @@ import { Link } from 'react-router-dom'
 import React, { useEffect } from 'react'
 import axios from 'axios'
 
-// axios.post('http://localhost:8081/driver/', {
+// axios.post('http://localhost:8081/driver/drivers', {
 //   "user": {
 //     "username": "cameron",
 //     "email": "noreply.trucksystem@gmail.com",
 //     "password": "hashed_password"
 //   },
-//   "driver": {
+//   "drivers": {
 //     "name": "Hajnal Szabolcs",
 //     "address": "Kisvárda",
 //     "phoneNumber": "0690 538 6459"
@@ -41,7 +41,10 @@ export default function Records() {
   }
 
   const loadDrivers = async () => {
-    const result = await axios.get('http://localhost:8081/driver/');
+    const result = await axios.get('http://localhost:8081/driver/drivers');
+    if(result.data.length === 0) {
+      return;
+    }
     setDrivers(result.data)
     console.log(result.data)
   }
@@ -86,13 +89,13 @@ export default function Records() {
                     {drivers.map((driver, index) => (
                       <tr>
                         <th scope="row">{index}</th>
-                        <td>{driver.driver.driverId}</td>
-                        <td>{driver.driver.address}</td>
-                        <td>{driver.driver.name}</td>
-                        <td>{driver.driver.phoneNumber}</td>
+                        <td>{driver.driverId}</td>
+                        <td>{driver.address}</td>
+                        <td>{driver.name}</td>
+                        <td>{driver.phoneNumber}</td>
                         <td>
-                          <Link to={`/Editperson/${driver.driver.driverId}`} type="button" class="btn btn-primary me-2">Edit</Link>
-                          <button type="button" class="btn btn-danger" onClick={() => deleteDriver(driver.driver.driverId)}>Delete</button>
+                          <Link to={`/Editperson/${driver.driverId}`} type="button" class="btn btn-primary me-2">Edit</Link>
+                          <button type="button" class="btn btn-danger" onClick={() => deleteDriver(driver.driverId)}>Delete</button>
                         </td>
                       </tr>
                     ))}
