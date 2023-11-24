@@ -21,9 +21,6 @@ export default function MyNavbar() {
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                             <li class="nav-item top-0">
-                                <Link class="nav-link active" aria-current="page" to={"/home"}>Kezdőoldal</Link>
-                            </li>
-                            <li class="nav-item top-0">
                                 <Link class="nav-link active" aria-current="page" to={"/about"}>Munkaterv</Link>
                             </li>
                         </ul>
@@ -34,7 +31,9 @@ export default function MyNavbar() {
                                         <li class="nav-item top-0">
                                             <Link class="nav-link active" aria-current="page" to={"/records"}>Nyilvántartás</Link>
                                         </li>
-
+                                        <li class="nav-item top-0">
+                                            <Link class="nav-link active" aria-current="page" to={"/adddriver"}>Add Driver</Link>
+                                        </li>
                                     </ul>
                                     <h className="pe-3">Üdvözöllek, {auth}</h>
                                     <form class="d-flex">

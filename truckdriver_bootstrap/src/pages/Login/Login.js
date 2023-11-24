@@ -1,9 +1,32 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import { MyNavbarMain } from '../../components';
-
 import { Link, useNavigate } from 'react-router-dom';
 
 export default function Login() {
+  const [users, setUsers] = React.useState([]);
+
+  let dataArray = []
+  useEffect(() => {
+    loadUsers()
+      // axios
+      //   .get("http://localhost:8081/driver/")
+      //   .then(res => {
+      //     const newItem = {
+      //       username: res.data.user.username,
+      //       name: res.data.driver.name,
+      //     };  
+      //     dataArray.push(newItem);
+      //   })
+  }, []);
+
+  const loadUsers = async () => {
+    const result = await axios.get('http://localhost:8081/driver/');
+      
+    setUsers(result.data)
+    console.log(result.data)
+  }
+
   const [errorMessages, setErrorMessages] = useState({});
   const [isSubmitted, setIsSubmitted] = useState(false);
 
@@ -34,11 +57,27 @@ export default function Login() {
     const data = new FormData(event.target);
     const uname = data.get("uname");
     const pass = data.get("pass");
+    //-------------------------------------------------------------------------------------------------------------//
+    // const userName_database = users.find((user) => user.driver.name === uname);
+    // const password_database = users.find((user) => user.user.username === pass);
+    //-------------------------------------------------------------------------------------------------------------//
 
-    const user = database.find((user) => user.pass === pass);
-    const isValid = user && user.pass === pass;
+    console.log("uname: " + uname);
+    console.log("pass: " + pass);
+    //-------------------------------------------------------------------------------------------------------------//
+    // console.log("userName_database: " + userName_database);               ADATBÁZISBÓL KERESÉS
+    // console.log("password_database: " + password_database);
+    // const isValidPass_database = password_database && password_database.driver.name === pass;
+    // const isValidUname_database = userName_database && userName_database.user.username === uname;
+    //-------------------------------------------------------------------------------------------------------------//
 
-    if (!isValid) {
+    const userUname = database.find((user) => user.pass === pass);
+    const userPass = database.find((user) => user.pass === pass);
+
+    const isValidPass = userPass && userPass.pass === pass;
+    const isValidUname = userUname && userUname.uname === uname;
+
+    if (!isValidPass || !isValidUname) {
       setErrorMessages({
         name: "pass",
         message: errors.pass
@@ -58,7 +97,7 @@ export default function Login() {
   const renderForm = (
     <div className="container mt-4 pt-5">
       <div className="form d-flex justify-content-center pt-5">
-        <form className="border border-info-subtle border-3 p-5" onSubmit={handleSubmit}>
+        <form className="border border-info-subtle border-3 p-5 shadow" onSubmit={handleSubmit}>
           <h3 className="text-center pb-3">Bejelentkezés</h3>
           <div className="mb-3">
             <label >Felhasználónév</label>
@@ -101,7 +140,7 @@ export default function Login() {
       <MyNavbarMain />
       <div className="app">
         <div className="login-form">
-          {isSubmitted ? navigate("/") : renderForm}
+          {isSubmitted ? navigate("/records") : renderForm}
         </div>
       </div>
     </div>

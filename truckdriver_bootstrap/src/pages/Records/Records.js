@@ -1,17 +1,18 @@
 import { MyNavbarMain } from '../../components'
 import { Collapse } from 'bootstrap'
+import { Link } from 'react-router-dom'
 import React, { useEffect } from 'react'
 import axios from 'axios'
 
 // axios.post('http://localhost:8081/driver/', {
 //   "user": {
-//     "username": "hajnalmark",
+//     "username": "cameron",
 //     "email": "noreply.trucksystem@gmail.com",
 //     "password": "hashed_password"
 //   },
 //   "driver": {
-//     "name": "hajnalmark",
-//     "address": "samsongeci",
+//     "name": "Hajnal Szabolcs",
+//     "address": "Kisvárda",
 //     "phoneNumber": "0690 538 6459"
 //   }
 // })
@@ -51,6 +52,11 @@ export default function Records() {
     console.log(result.data)
   }
 
+  const deleteDriver = async (id) => {
+    await axios.delete(`http://localhost:8081/driver/${id}`);
+    loadDrivers();
+  }
+
   return (
     <div>
       <MyNavbarMain />
@@ -68,11 +74,12 @@ export default function Records() {
                 <table class="table table-striped table-bordered mt-4">
                   <thead className='table-primary'>
                     <tr>
-                      <th scope="col">User ID</th>
+                      <th scope="col">User ID</th>  
                       <th scope="col">Driver ID</th>
                       <th scope="col">Address</th>
                       <th scope="col">Name</th>
                       <th scope="col">Phone Number</th>
+                      <th scope="col"></th>
                     </tr>
                   </thead>
                   <tbody>
@@ -83,6 +90,10 @@ export default function Records() {
                         <td>{driver.driver.address}</td>
                         <td>{driver.driver.name}</td>
                         <td>{driver.driver.phoneNumber}</td>
+                        <td>
+                          <Link to={`/Editperson/${driver.driver.driverId}`} type="button" class="btn btn-primary me-2">Edit</Link>
+                          <button type="button" class="btn btn-danger" onClick={() => deleteDriver(driver.driver.driverId)}>Delete</button>
+                        </td>
                       </tr>
                     ))}
 
@@ -122,6 +133,10 @@ export default function Records() {
                           <td>{freight.startTime}</td>
                           <td>{freight.destination}</td>
                           <td>{freight.origin}</td>
+                          <td>
+                            <Link to={`/Editperson/${freight.driverId}`} type="button" class="btn btn-primary me-2">Edit</Link>
+                            <button type="button" class="btn btn-danger">Delete</button>
+                        </td>
                         </tr>
                       ))}
 
@@ -160,6 +175,10 @@ export default function Records() {
                           <td>{truck.brand}</td>
                           <td>{truck.fuelType}</td>
                           <td>{truck.plateNumber}</td>
+                          <td>
+                          <Link to={`/Editperson/${truck.driverId}`} type="button" class="btn btn-primary me-2">Edit</Link>
+                            <button type="button" class="btn btn-danger">Delete</button>
+                        </td>
                         </tr>
                       ))}
                     </tbody>
