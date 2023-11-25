@@ -94,7 +94,7 @@ export default function Records() {
                         <td>{driver.name}</td>
                         <td>{driver.phoneNumber}</td>
                         <td>
-                          <Link to={`/Editperson/${driver.driverId}`} type="button" class="btn btn-primary me-2">Edit</Link>
+                          <Link to={`/Editdriver/${driver.driverId}`} type="button" class="btn btn-primary me-2">Edit</Link>
                           <button type="button" class="btn btn-danger" onClick={() => deleteDriver(driver.driverId)}>Delete</button>
                         </td>
                       </tr>
@@ -137,7 +137,7 @@ export default function Records() {
                           <td>{freight.destination}</td>
                           <td>{freight.origin}</td>
                           <td>
-                            <Link to={`/Editperson/${freight.driverId}`} type="button" class="btn btn-primary me-2">Edit</Link>
+                            <Link to={`/Editdriver/${freight.driverId}`} type="button" class="btn btn-primary me-2">Edit</Link>
                             <button type="button" class="btn btn-danger">Delete</button>
                         </td>
                         </tr>
@@ -179,7 +179,7 @@ export default function Records() {
                           <td>{truck.fuelType}</td>
                           <td>{truck.plateNumber}</td>
                           <td>
-                          <Link to={`/Editperson/${truck.driverId}`} type="button" class="btn btn-primary me-2">Edit</Link>
+                          <Link to={`/Editdriver/${truck.driverId}`} type="button" class="btn btn-primary me-2">Edit</Link>
                             <button type="button" class="btn btn-danger">Delete</button>
                         </td>
                         </tr>

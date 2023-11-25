@@ -1,11 +1,9 @@
 import React from 'react'
 import { MyNavbarMain } from '../../components'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import axios from 'axios'
 
 export default function Register() {
-  const navigate = useNavigate();
-
   // const [errorMessages, setErrorMessages] = React.useState({}); // ez a hook az errorokat tárolja
   const [isSubmitted, setIsSubmitted] = React.useState(false);
 
@@ -104,13 +102,11 @@ export default function Register() {
       <div className="app">
         <div className="login-form">
           {isSubmitted ?
-            <div className="container mt-5 alert alert-success " role="alert">
-              <div className="d-flex justify-content-center">
-                Sikeres regisztráció!
-              </div>
-              <div className="d-flex justify-content-center pt-2">
-                <Link to={"/Login"}>A belépéshez kattintson ide!</Link>
-              </div>
+            <div className='container mt-2 pt-2 d-flex justify-content-center'>
+              <form className='border border-info-subtle border-3 p-4 shadow text-center' >
+                <h5>Sikeres regisztráció!</h5><br />
+                <h5><Link to={"/Login"}>A belépéshez kattintson ide!</Link></h5>
+              </form>
             </div>
             : renderForm}
         </div>
