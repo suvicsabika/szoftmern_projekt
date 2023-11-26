@@ -1,0 +1,452 @@
+{
+	"info": {
+		"_postman_id": "bba2ea76-28e8-44a5-9fe0-563be1d501ff",
+		"name": "szoftmern_projekt",
+		"description": "A különböző táblákhoz tartozó CRUD műveletek ellenőrzése.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "29630629"
+	},
+	"item": [
+		{
+			"name": "Driver",
+			"item": [
+				{
+					"name": "getDriver",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8081/driver/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"driver",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getDriverById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8081/driver/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"driver",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "postDriver",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"user\": {\r\n        \"username\": \"john_doe\",\r\n        \"email\": \"noreply.trucksystem@gmail.com\",\r\n        \"password\": \"hashed_password\"\r\n    },\r\n    \"driver\": {\r\n        \"name\": \"Mike\",\r\n        \"address\": \"4230, City, Street, ...\",\r\n        \"phoneNumber\": \"40 12 1233 412\"\r\n    }\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8081/driver/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"driver",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteDriver",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8081/driver/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"driver",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "putDriver",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"user\": {\r\n        \"username\": \"NEW john_doe\",\r\n        \"email\": \"john.doe@example.com\",\r\n        \"password\": \"hashed_password\"\r\n    },\r\n    \"driver\": {\r\n        \"name\": \"Mike\",\r\n        \"address\": \"4230, City, Street, ...\",\r\n        \"phoneNumber\": \"40 12 1233 412\"\r\n    }\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8081/driver/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"driver",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Freight",
+			"item": [
+				{
+					"name": "getFreight",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8081/freight/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"freight",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getFreightById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8081/freight/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"freight",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "postFreight",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"origin\": \"Origin Location\",\r\n    \"driverId\": 1,\r\n    \"destination\": \"Destination Location\",\r\n    \"cargo\": \"Cargo Description\",\r\n    \"startTime\": \"2023-10-08T16:42:40.748\",\r\n    \"arrivalTime\": \"2023-10-09T16:42:40.748\",\r\n    \"km\": 208.2\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8081/freight/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"freight",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteFreight",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8081/freight/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"freight",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "putFreight",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"origin\": \"Origin Location\",\r\n    \"driverId\": 1,\r\n    \"destination\": \"New Destination Location\",\r\n    \"cargo\": \"Cargo Description\",\r\n    \"startTime\": \"2023-10-08T16:42:40.748+00:00\",\r\n    \"arrivalTime\": \"2023-10-09T16:42:40.748+00:00\"\r\n}\r\n"
+						},
+						"url": {
+							"raw": "http://localhost:8081/freight/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"freight",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Shared",
+			"item": [
+				{
+					"name": "getDriver-by",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8081/freight/by-driver/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"freight",
+								"by-driver",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Truck",
+			"item": [
+				{
+					"name": "getTruck",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8081/truck",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"truck"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getTruckById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8081/truck/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"truck",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "postTruck",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"driverId\":1,\r\n    \"brand\": \"Volvo\",\r\n    \"plateNumber\": \"ABC123\",\r\n    \"fuelType\": \"DIESEL\",\r\n    \"averageConsumption\": 12.5\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8081/truck/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"truck",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "putTruck",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"driverId\":1,\r\n    \"brand\": \"Volvo\",\r\n    \"plateNumber\": \"ABC123\",\r\n    \"fuelType\": \"GASOLINE\",\r\n    \"averageConsumption\": 12.5\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8081/truck/1/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"truck",
+								"1",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteTruck",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8081/truck/1/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"truck",
+								"1",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Email",
+			"item": [
+				{
+					"name": "sendEmail",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8081/email/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"email",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
