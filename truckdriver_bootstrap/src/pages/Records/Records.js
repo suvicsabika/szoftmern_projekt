@@ -272,10 +272,10 @@ export default function Records() {
                     </tr>
                   </thead>
                   <tbody>
-                    {/*new*/}:
+                    {/*new*/}
                     {drivers.map((driver, index) => (
                       <tr>
-                        <th scope="row">{index}</th>
+                        <th scope="row">{index+1}</th>
                         <td>{driver.driverId}</td>
                         <td>{driver.address}</td>
                         <td>{driver.name}</td>
@@ -283,29 +283,43 @@ export default function Records() {
                         <td>
                           <Link to={`/Editdriver/${driver.driverId}`} type="button" class="btn btn-primary me-2">Edit</Link>
                           <button type="button" class="btn btn-danger" onClick={() => deleteDriver(driver.driverId)}>Delete</button>
-                          {/*<div className="form-check">
-                            <input
-                              type="checkbox"
-                              className="form-check-input"
-                              id={`isAdminCheckbox-${driver.driverId}`}
-                              onChange={() => handleAdminCheckboxChange(driver.driverId, driver.driverId)}
-                            />
-                            <label className="form-check-label" htmlFor={`isAdminCheckbox-${driver.driverId}`}>
-                              Admin
-                            </label>
-                           </div>*/}
                           <div className="form-check">
                             <input
                               type="checkbox"
                               className="form-check-input"
                               id={`isAdminCheckbox-${driver.driverId}`}
                               onChange={() => handleAdminCheckboxChange(driver.driverId, driver.driverId)}
-                              checked={driver.isAdmin} // Set checked based on isAdmin property
+                              checked={driver.isAdmin}
                             />
                             <label className="form-check-label" htmlFor={`isAdminCheckbox-${driver.driverId}`}>
                               Admin
                             </label>
                           </div>
+                          <button
+                            type="button"
+                            className="btn btn-success ms-2"
+                            onClick={async () => {
+                              try {
+                                const reportResponse = await axios.get(`http://localhost:8081/freight/report/${driver.driverId}`);
+                                const reportData = reportResponse.data;
+
+                                const csvData = [
+                                  ["Total Average Consumption", "Number of Freights", "Total Distance"],
+                                  [reportData.totalAverageConsumption, reportData.numberOfFreights, reportData.totalDistance]
+                                ];
+
+                                const blob = new Blob([csvData.map(row => row.join(','))], { type: 'text/csv' });
+                                const link = document.createElement('a');
+                                link.href = window.URL.createObjectURL(blob);
+                                link.download = `Driver_Report_${driver.driverId}.csv`;
+                                link.click();
+                              } catch (error) {
+                                console.error('Error generating report:', error);
+                              }
+                            }}
+                          >
+                            Generate Report
+                          </button>
                         </td>
                       </tr>
                     ))}

@@ -31,12 +31,15 @@ export default function MyNavbar() {
                                         <li class="nav-item top-0">
                                             <Link class="nav-link active" aria-current="page" to={"/records"}>Nyilvántartás - {localStorage.getItem("uname")}</Link>
                                         </li>
+                                        {auth == "admin" && (
+                                        <>
                                         <li class="nav-item top-0">
                                             <Link class="nav-link active" aria-current="page" to={"/recordsuser"}>Nyilvántartás - nemAdmin</Link>
                                         </li>
                                         <li class="nav-item top-0">
                                             <Link class="nav-link active" aria-current="page" to={"/adddriver"}>Add Driver</Link>
                                         </li>
+                                        </>)}
                                         <li class="nav-item top-0">
                                             <Link class="nav-link active" aria-current="page" to={"/email"}>Send an email</Link>
                                         </li>
