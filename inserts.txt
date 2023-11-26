@@ -1,12 +1,11 @@
 insert into freight(DISTANCE ,ARRIVAL_TIME ,START_TIME ,VEHICLE_ID ,CARGO ,DESTINATION ,ORIGIN,DRIVER_ID  )
-values('500','2017-07-23','2017-07-28','1','anyad','budapest','miezhe', '1');
+values('500','2017-07-23','2017-07-28','1','elelmiszer','budapest','debrecen', '1');
 
 insert into truck( AVERAGE_CONSUMPTION ,DRIVER_ID ,BRAND ,FUEL_TYPE ,PLATE_NUMBER )
-values('25.5','6', 'MAN', 'DIESEL', 'FASZ-123');
+values('25.5','6', 'MAN', 'DIESEL', 'ASD-123');
 
 insert into users(IS_ADMIN ,EMAIL ,PASSWORD ,USERNAME )
-values(false,'anyad@gmail.com','123456','admin3');
+values(false,'noreply.trucksystem@gmail.com','123456','admin3');
 
-
-kötvál: 6 3 3 3 = 15
-szabvál: 2 2 2matek = 6
+insert into driver(NAME, PHONE_NUMBER,ADDRESS)
+values('Teszt Elek', '+36301234533', 'Cim');

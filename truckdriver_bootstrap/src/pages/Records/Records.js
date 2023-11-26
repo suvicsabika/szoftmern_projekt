@@ -146,7 +146,7 @@ export default function Records() {
     }
   }
 
-  const loadDrivers = async () => {
+  /*const loadDrivers = async () => {
     const result = await axios.get('http://localhost:8081/driver/drivers');
     setDrivers(result.data)
     console.log(result.data)
@@ -154,7 +154,30 @@ export default function Records() {
       setIsDriverLengthZero(true);
       return 0;
     }
-  }
+  }*/
+  const loadDrivers = async () => {
+    try {
+      const driversResponse = await axios.get('http://localhost:8081/driver/drivers');
+      const driversData = driversResponse.data;
+  
+      // Fetch user information for each driver to get the admin status
+      const driversWithAdminStatus = await Promise.all(
+        driversData.map(async (driver) => {
+          const userResponse = await axios.get(`http://localhost:8081/driver/userid:${driver.driverId}`);
+          const user = userResponse.data;
+          return { ...driver, isAdmin: user.admin };
+        })
+      );
+  
+      setDrivers(driversWithAdminStatus);
+  
+      if (driversWithAdminStatus.length === 0) {
+        setIsDriverLengthZero(true);
+      }
+    } catch (error) {
+      console.error('Error loading drivers:', error);
+    }
+  };
 
   const loadTrucks = async () => {
     const result = await axios.get('http://localhost:8081/truck');
@@ -174,7 +197,8 @@ export default function Records() {
       try {
         const response = await axios.get(`http://localhost:8081/driver/userid:${userId}`);
         console.log("USERID: " + userId);
-        return response.data.isAdmin;
+        console.log("DATA:" + response.data);
+        return response.data.admin;
       } catch (error) {
         console.error(`Error fetching admin status for user ${userId}:`, error);
         return false;
@@ -184,7 +208,8 @@ export default function Records() {
     const handleAdminCheckboxChange = async (driverId, userId) => {
       try {
         const isAdmin = await fetchAdminStatus(userId);
-        console.log(`Admin status for user ${userId}: ${isAdmin}`);
+        console.log(`Admin status for user ${userId}:${isAdmin}`);
+        axios.post(`http://localhost:8081/driver/isAdmin:${userId}-${!isAdmin}`);
       } catch (error) {
         console.error('Error handling admin status:', error);
       }
@@ -248,7 +273,7 @@ export default function Records() {
                   </thead>
                   <tbody>
                     {/*new*/}:
-                    {Array.isArray(drivers) && drivers.map((driver, index) => (
+                    {drivers.map((driver, index) => (
                       <tr>
                         <th scope="row">{index}</th>
                         <td>{driver.driverId}</td>
@@ -258,13 +283,24 @@ export default function Records() {
                         <td>
                           <Link to={`/Editdriver/${driver.driverId}`} type="button" class="btn btn-primary me-2">Edit</Link>
                           <button type="button" class="btn btn-danger" onClick={() => deleteDriver(driver.driverId)}>Delete</button>
+                          {/*<div className="form-check">
+                            <input
+                              type="checkbox"
+                              className="form-check-input"
+                              id={`isAdminCheckbox-${driver.driverId}`}
+                              onChange={() => handleAdminCheckboxChange(driver.driverId, driver.driverId)}
+                            />
+                            <label className="form-check-label" htmlFor={`isAdminCheckbox-${driver.driverId}`}>
+                              Admin
+                            </label>
+                           </div>*/}
                           <div className="form-check">
                             <input
                               type="checkbox"
                               className="form-check-input"
                               id={`isAdminCheckbox-${driver.driverId}`}
-                              checked={`fetchAdminStatus(driver.driverId)`}
-                              onChange={() => handleAdminCheckboxChange(driver.driverId, driver.userId)}
+                              onChange={() => handleAdminCheckboxChange(driver.driverId, driver.driverId)}
+                              checked={driver.isAdmin} // Set checked based on isAdmin property
                             />
                             <label className="form-check-label" htmlFor={`isAdminCheckbox-${driver.driverId}`}>
                               Admin
