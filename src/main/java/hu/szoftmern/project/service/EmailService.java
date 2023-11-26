@@ -18,6 +18,9 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
+import java.sql.Timestamp;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -51,7 +54,7 @@ public class EmailService {
     }
 
     // sendEmail: Elküld egy e-mailt a megadott címzettnek.
-    public void sendEmail(String to, String customSubject, String customParamBody) {
+    public void sendWeeklyEmail(String to, String customSubject, String customParamBody) {
         Optional<User> user = userRepository.findByEmail(to);
         Optional<Driver> driver = null;
         System.out.println(user);
@@ -67,18 +70,27 @@ public class EmailService {
 
             for (Freight freight : actualFreights) {
                 System.out.println(freight);
+
+                // Convert the Timestamp to LocalDateTime
+                LocalDateTime timestampDateTime = freight.getStartTime().toLocalDateTime();
+
+                // Get the current date
+                LocalDate currentDate = LocalDate.now();
+                if (timestampDateTime.toLocalDate().isBefore(currentDate)) {
+                    continue;
+                }
                 freightDetails.append("Freight ID: ").append(freight.getFreightId()).append("\n");
                 freightDetails.append("Cargo: ").append(freight.getCargo()).append("\n");
                 freightDetails.append("Origin: ").append(freight.getOrigin()).append("\n");
                 freightDetails.append("Destination: ").append(freight.getDestination()).append("\n");
                 freightDetails.append("Start Time: ").append(freight.getStartTime()).append("\n");
                 freightDetails.append("Arrival Time: ").append(freight.getArrivalTime()).append("\n\n");
+
             }
 
-            // Replace placeholders in the email body
             customBody = customBody.replace("{name}", actualDriver.getName())
                     .replace("{event}", "Freight Details")
-                    .replace("{date}", "") // You may want to replace this with a specific date
+                    .replace("{date}", "")
                     .replace("{details}", freightDetails.toString());
         } else {
             System.out.println("Couldn't find the Driver!");
@@ -95,5 +107,30 @@ public class EmailService {
         javaMailSender.send(message);
 
         System.out.println("Email Sent Successfully!!");
+    }
+
+    public void sendCostumEmail(String to, String subject, String body) {
+        Optional<User> user = userRepository.findByEmail(to);
+        Optional<Driver> driver = null;
+        System.out.println(user);
+        if (user.isPresent()) {
+            driver = driverRepository.findById(user.get().getDriverId());
+        }
+        System.out.println(driver);
+        if (driver != null && driver.isPresent()) {
+            SimpleMailMessage message = new SimpleMailMessage();
+            message.setTo(to);
+            message.setSubject(subject);
+            message.setText(body);
+
+            message.setFrom(myEmail);
+            message.setReplyTo(myEmail);
+
+            javaMailSender.send(message);
+
+            System.out.println("Email Sent Successfully!!");
+        } else {
+            System.out.println("Couldn't find the Driver!");
+        }
     }
 }

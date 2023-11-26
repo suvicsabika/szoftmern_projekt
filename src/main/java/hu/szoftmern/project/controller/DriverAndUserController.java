@@ -94,6 +94,7 @@ public class DriverAndUserController {
         return new ResponseEntity<>("The driver user has been created!", HttpStatus.CREATED);
     }
 
+    // loginDriver: Bejelentkezési folyamat kezelése sofőrök számára.
     @PostMapping("/login/")
     public ResponseEntity<String> loginDriver(@RequestBody User user) {
         if (user == null || user.getUsername() == null || user.getPassword() == null) {
@@ -117,7 +118,19 @@ public class DriverAndUserController {
         }
     }
 
-    
+    @PostMapping("/isAdmin:{userId}-{isAdmin}")
+    public ResponseEntity<String> updateisAdmin(@PathVariable Long userId, @PathVariable boolean isAdmin) {
+        Optional<User> user = userRepository.findById(userId);
+        if (!user.isPresent()) {
+            return new ResponseEntity<>("Couldn't find user!", HttpStatus.BAD_REQUEST);
+        }
+
+        User foundUser = user.get();
+        foundUser.setAdmin(isAdmin);
+        userRepository.save(foundUser);
+
+        return new ResponseEntity<>(String.format("User's isAdmin attribute changed from {%b} to {%b}!", !isAdmin, isAdmin), HttpStatus.OK);
+    }
 
     // deleteDriver: Egy adott azonosítójú sofőr és a hozzá tartozó felhasználó törlése.
     @DeleteMapping("/{id}")

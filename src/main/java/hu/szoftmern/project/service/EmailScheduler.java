@@ -19,12 +19,12 @@ public class EmailScheduler {
         this.userRepository = userRepository;
     }
 
-    @Scheduled(cron = "0 0 12 ? * SUN") // This cron expression triggers the method every Sunday at 12 PM
+    @Scheduled(cron = "0 0 12 ? * SUN")
     public void sendWeeklyFreightEmails() {
         List<User> allUsers = userRepository.findAll();
         for (User user : allUsers) {
             if (user.getDriverId() != null) {
-                emailService1.sendEmail(user.getEmail(), "Weekly Freight Details", "Something");
+                emailService1.sendWeeklyEmail(user.getEmail(), "Weekly Freight Details", "Something");
             }
         }
     }

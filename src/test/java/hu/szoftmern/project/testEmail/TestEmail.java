@@ -13,7 +13,7 @@ import javax.mail.Session;
 import java.util.Properties;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(properties = "spring.config.location=classpath:/all.properties")
+@SpringBootTest()
 public class TestEmail {
 
     @Autowired
@@ -23,7 +23,7 @@ public class TestEmail {
     private JavaMailSender javaMailSender; // Mock JavaMailSender
 
     @Test
-    public void testSendEmail() {
-        emailService.sendEmail("noreply.trucksystem@gmail.com", null, null);
+    public void testWeeklySendEmail() {
+        emailService.sendWeeklyEmail("noreply.trucksystem@gmail.com", null, null);
     }
 }

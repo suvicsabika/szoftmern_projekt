@@ -14,6 +14,6 @@ class ProjectApplicationTests {
         testDatabase.testUserEntityPersistence();
 
         TestEmail testEmail = new TestEmail();
-        testEmail.testSendEmail();
+        testEmail.testWeeklySendEmail();
     }
 }
