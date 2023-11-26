@@ -37,6 +37,10 @@ export default function MyNavbar() {
                                         <li class="nav-item top-0">
                                             <Link class="nav-link active" aria-current="page" to={"/adddriver"}>Add Driver</Link>
                                         </li>
+                                        <li class="nav-item top-0">
+                                            <Link class="nav-link active" aria-current="page" to={"/email"}>Send an email</Link>
+                                        </li>
+                                        
                                     </ul>
                                     <h className="pe-3">Üdvözöllek, {auth}</h>
                                     <form class="d-flex">

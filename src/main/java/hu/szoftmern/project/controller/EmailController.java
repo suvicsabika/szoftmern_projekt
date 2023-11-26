@@ -20,15 +20,15 @@ public class EmailController {
     }
 
     // sendEmail: E-mail küldése egy adott azonosítójú sofőrnek.
-    @PostMapping("/id:{driverId}subject:{subject}body:{body}")
-    public ResponseEntity<String> sendEmail(@PathVariable Long driverId, @PathVariable String subject, @PathVariable String body) {
-        String driversEmail = String.valueOf(userRepository.getById(driverId).getEmail());
-
-        emailService.sendCostumEmail(driversEmail, subject, body);
+    @PostMapping("/id:{driver}subject:{subject}body:{body}")
+    public ResponseEntity<String> sendEmail(@PathVariable String driver, @PathVariable String subject, @PathVariable String body) {
+        //String driversEmail = String.valueOf(userRepository.getById(driverId).getEmail());
+        System.out.println("STRING VAGYOK " + driver);
+        emailService.sendCostumEmail(driver, subject, body);
         return ResponseEntity.ok("Email sent successfully");
     }
 
-    @PostMapping("/id:{driverId}")
+    @PostMapping("/weeklyid:{driverId}")
     public ResponseEntity<String> sendWeeklyScheduledEmailsTest(@PathVariable Long driverId) {
         String driversEmail = String.valueOf(userRepository.getById(driverId).getEmail());
         emailService.sendWeeklyEmail(driversEmail, "Weekly Freight Details", "Something");

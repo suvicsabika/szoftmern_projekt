@@ -1,13 +1,19 @@
-C:\Users\Asus\Desktop\hetfo\szoftmern_projekt\src\main\java\hu\szoftmern\project\ProjectApplication.java
-C:\Users\Asus\Desktop\hetfo\szoftmern_projekt\src\main\java\hu\szoftmern\project\model\Driver.java
-C:\Users\Asus\Desktop\hetfo\szoftmern_projekt\src\main\java\hu\szoftmern\project\model\User.java
-C:\Users\Asus\Desktop\hetfo\szoftmern_projekt\src\main\java\hu\szoftmern\project\service\FreightService.java
-C:\Users\Asus\Desktop\hetfo\szoftmern_projekt\src\main\java\hu\szoftmern\project\controller\ResourceNotFoundException.java
-C:\Users\Asus\Desktop\hetfo\szoftmern_projekt\src\main\java\hu\szoftmern\project\model\UserDriverRequest.java
-C:\Users\Asus\Desktop\hetfo\szoftmern_projekt\src\main\java\hu\szoftmern\project\repository\UserRepository.java
-C:\Users\Asus\Desktop\hetfo\szoftmern_projekt\src\main\java\hu\szoftmern\project\repository\DriverRepository.java
-C:\Users\Asus\Desktop\hetfo\szoftmern_projekt\src\main\java\hu\szoftmern\project\service\DriverService.java
-C:\Users\Asus\Desktop\hetfo\szoftmern_projekt\src\main\java\hu\szoftmern\project\repository\FreightRepository.java
-C:\Users\Asus\Desktop\hetfo\szoftmern_projekt\src\main\java\hu\szoftmern\project\model\Freight.java
-C:\Users\Asus\Desktop\hetfo\szoftmern_projekt\src\main\java\hu\szoftmern\project\controller\DriverAndUserController.java
-C:\Users\Asus\Desktop\hetfo\szoftmern_projekt\src\main\java\hu\szoftmern\project\controller\FreightController.java
+C:\Users\Asus\Documents\DE-IK MI BSc\5. félév\Szoftverfejlesztés mérnököknek\merged_branch\szoftmern_projekt\src\main\java\hu\szoftmern\project\model\Freight.java
+C:\Users\Asus\Documents\DE-IK MI BSc\5. félév\Szoftverfejlesztés mérnököknek\merged_branch\szoftmern_projekt\src\main\java\hu\szoftmern\project\controller\EmailController.java
+C:\Users\Asus\Documents\DE-IK MI BSc\5. félév\Szoftverfejlesztés mérnököknek\merged_branch\szoftmern_projekt\src\main\java\hu\szoftmern\project\controller\ResourceNotFoundException.java
+C:\Users\Asus\Documents\DE-IK MI BSc\5. félév\Szoftverfejlesztés mérnököknek\merged_branch\szoftmern_projekt\src\main\java\hu\szoftmern\project\model\FuelType.java
+C:\Users\Asus\Documents\DE-IK MI BSc\5. félév\Szoftverfejlesztés mérnököknek\merged_branch\szoftmern_projekt\src\main\java\hu\szoftmern\project\repository\FreightRepository.java
+C:\Users\Asus\Documents\DE-IK MI BSc\5. félév\Szoftverfejlesztés mérnököknek\merged_branch\szoftmern_projekt\src\main\java\hu\szoftmern\project\controller\FreightController.java
+C:\Users\Asus\Documents\DE-IK MI BSc\5. félév\Szoftverfejlesztés mérnököknek\merged_branch\szoftmern_projekt\src\main\java\hu\szoftmern\project\repository\TruckRepository.java
+C:\Users\Asus\Documents\DE-IK MI BSc\5. félév\Szoftverfejlesztés mérnököknek\merged_branch\szoftmern_projekt\src\main\java\hu\szoftmern\project\service\EmailScheduler.java
+C:\Users\Asus\Documents\DE-IK MI BSc\5. félév\Szoftverfejlesztés mérnököknek\merged_branch\szoftmern_projekt\src\main\java\hu\szoftmern\project\controller\DriverAndUserController.java
+C:\Users\Asus\Documents\DE-IK MI BSc\5. félév\Szoftverfejlesztés mérnököknek\merged_branch\szoftmern_projekt\src\main\java\hu\szoftmern\project\ProjectApplication.java
+C:\Users\Asus\Documents\DE-IK MI BSc\5. félév\Szoftverfejlesztés mérnököknek\merged_branch\szoftmern_projekt\src\main\java\hu\szoftmern\project\model\Truck.java
+C:\Users\Asus\Documents\DE-IK MI BSc\5. félév\Szoftverfejlesztés mérnököknek\merged_branch\szoftmern_projekt\src\main\java\hu\szoftmern\project\model\Driver.java
+C:\Users\Asus\Documents\DE-IK MI BSc\5. félév\Szoftverfejlesztés mérnököknek\merged_branch\szoftmern_projekt\src\main\java\hu\szoftmern\project\model\User.java
+C:\Users\Asus\Documents\DE-IK MI BSc\5. félév\Szoftverfejlesztés mérnököknek\merged_branch\szoftmern_projekt\src\main\java\hu\szoftmern\project\service\EmailService.java
+C:\Users\Asus\Documents\DE-IK MI BSc\5. félév\Szoftverfejlesztés mérnököknek\merged_branch\szoftmern_projekt\src\main\java\hu\szoftmern\project\config\WebConfig.java
+C:\Users\Asus\Documents\DE-IK MI BSc\5. félév\Szoftverfejlesztés mérnököknek\merged_branch\szoftmern_projekt\src\main\java\hu\szoftmern\project\repository\UserRepository.java
+C:\Users\Asus\Documents\DE-IK MI BSc\5. félév\Szoftverfejlesztés mérnököknek\merged_branch\szoftmern_projekt\src\main\java\hu\szoftmern\project\controller\TruckController.java
+C:\Users\Asus\Documents\DE-IK MI BSc\5. félév\Szoftverfejlesztés mérnököknek\merged_branch\szoftmern_projekt\src\main\java\hu\szoftmern\project\model\UserDriverRequest.java
+C:\Users\Asus\Documents\DE-IK MI BSc\5. félév\Szoftverfejlesztés mérnököknek\merged_branch\szoftmern_projekt\src\main\java\hu\szoftmern\project\repository\DriverRepository.java
