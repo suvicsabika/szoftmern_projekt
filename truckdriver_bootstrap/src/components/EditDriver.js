@@ -106,8 +106,7 @@ export default function EditDriver() {
         </form>
       </div>
   );
-
-
+  
   return (
     <div>
       <MyNavbarMain />

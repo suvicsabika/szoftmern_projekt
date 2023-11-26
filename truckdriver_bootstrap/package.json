@@ -13,10 +13,7 @@
     "react": "^18.2.0",
     "react-axios": "^2.0.6",
     "react-csv": "^2.2.2",
-<<<<<<< HEAD
     "react-csv-importer": "^0.8.1",
-=======
->>>>>>> a509bb6904ce8d8b5c32d253e929354a0a3b3d2e
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.20.0",
     "react-scripts": "5.0.1",

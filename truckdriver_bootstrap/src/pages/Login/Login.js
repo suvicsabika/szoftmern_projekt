@@ -21,15 +21,18 @@ export default function Login() {
   const database = [
     {
       uname: "user1",
-      pass: "pass1"
+      pass: "pass1",
+      isAdmin: "false"
     },
     {
       uname: "user2",
-      pass: "pass2"
+      pass: "pass2",
+      isAdmin: "false"
     },
     {
       uname: "admin",
-      pass: "admin"
+      pass: "admin",
+      isAdmin: "true"
     }
   ];
 
@@ -43,6 +46,7 @@ export default function Login() {
     const data = new FormData(event.target);
     const uname = data.get("uname");
     const pass = data.get("pass");
+    // const isAdmin = database.find((user) => user.pass === pass).isAdmin; //todo: admin csekkolas igaz v nem
 
     console.log("uname: " + uname);
     console.log("pass: " + pass);
@@ -68,6 +72,7 @@ export default function Login() {
       return;
     }
     localStorage.setItem("uname", uname);
+    localStorage.setItem("isAdmin", isAdmin);
     setErrorMessages({});
     setIsSubmitted(true);
   };

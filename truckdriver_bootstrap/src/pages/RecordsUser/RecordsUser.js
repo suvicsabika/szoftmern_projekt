@@ -6,19 +6,6 @@ import axios from 'axios'
 import dayjs from 'dayjs'
 import { CSVLink } from "react-csv";
 
-// axios.post('http://localhost:8081/driver/drivers', {
-//   "user": {
-//     "username": "cameron",
-//     "email": "noreply.trucksystem@gmail.com",
-//     "password": "hashed_password"
-//   },
-//   "drivers": {
-//     "name": "Hajnal Szabolcs",
-//     "address": "Kisvárda",
-//     "phoneNumber": "0690 538 6459"
-//   }
-// })
-
 export default function Records() {
 
   const [isTruckLengthZero, setIsTruckLengthZero] = React.useState(false); //import csv gombhoz kell

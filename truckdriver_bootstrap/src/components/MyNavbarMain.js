@@ -29,7 +29,10 @@ export default function MyNavbar() {
                                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                                         <li class="nav-item top-0">
-                                            <Link class="nav-link active" aria-current="page" to={"/records"}>Nyilvántartás</Link>
+                                            <Link class="nav-link active" aria-current="page" to={"/records"}>Nyilvántartás - {localStorage.getItem("uname")}</Link>
+                                        </li>
+                                        <li class="nav-item top-0">
+                                            <Link class="nav-link active" aria-current="page" to={"/recordsuser"}>Nyilvántartás - nemAdmin</Link>
                                         </li>
                                         <li class="nav-item top-0">
                                             <Link class="nav-link active" aria-current="page" to={"/adddriver"}>Add Driver</Link>
