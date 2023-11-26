@@ -11,7 +11,6 @@ const LoginForm = () => {
   const [success, setSuccess] = useState(false);
 
   const navigate = useNavigate();
-  const [isSubmitted, setIsSubmitted] = React.useState(false);
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -21,22 +20,20 @@ const LoginForm = () => {
         "username": username,
         "password": password,
       });
-
+      console.log(response);
       if (response.status === 200) {
         setSuccess(true);
         setError(null);
-        // You may perform additional actions based on the successful response
+        localStorage.setItem("uname", username);
       } else {
         setSuccess(false);
-        setError('Login failed. Please check your credentials.');
+        setError('Belépés sikertelen. Ellenőrizze az adatokat!');
       }
     } catch (error) {
       console.error('Login failed:', error.response.data);
       setSuccess(false);
-      setError('Login failed. Please check your credentials.');
+      setError('Belépés sikertelen. Ellenőrizze az adatokat!');
     }
-    setIsSubmitted(true);
-    localStorage.setItem("uname", username);
   };
 
   const renderForm = (
@@ -67,7 +64,6 @@ const LoginForm = () => {
             />
           </div>
           {error && <div style={{ color: 'red' }}>{error}</div>}
-          {success && <div style={{ color: 'green' }}>Login successful!</div>}
           <div className="d-grid">
             <button type="submit" className="btn btn-primary">
               Küldés
@@ -86,7 +82,7 @@ const LoginForm = () => {
       <MyNavbarMain />
       <div className="app">
         <div className="login-form">
-          {isSubmitted ? navigate("/records") : renderForm}
+          {success ? navigate("/records") : renderForm}
         </div>
       </div>
     </div>

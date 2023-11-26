@@ -160,7 +160,6 @@ export default function Records() {
       const driversResponse = await axios.get('http://localhost:8081/driver/drivers');
       const driversData = driversResponse.data;
   
-      // Fetch user information for each driver to get the admin status
       const driversWithAdminStatus = await Promise.all(
         driversData.map(async (driver) => {
           const userResponse = await axios.get(`http://localhost:8081/driver/userid:${driver.driverId}`);
@@ -210,6 +209,7 @@ export default function Records() {
         const isAdmin = await fetchAdminStatus(userId);
         console.log(`Admin status for user ${userId}:${isAdmin}`);
         axios.post(`http://localhost:8081/driver/isAdmin:${userId}-${!isAdmin}`);
+        loadDrivers();
       } catch (error) {
         console.error('Error handling admin status:', error);
       }
@@ -304,7 +304,7 @@ export default function Records() {
                                 const reportData = reportResponse.data;
 
                                 const csvData = [
-                                  ["Total Average Consumption", "Number of Freights", "Total Distance"],
+                                  ["Total Average Consumption", "Number of Freights", "Total Distance", "\n"],
                                   [reportData.totalAverageConsumption, reportData.numberOfFreights, reportData.totalDistance]
                                 ];
 

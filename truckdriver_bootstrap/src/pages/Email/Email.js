@@ -32,53 +32,57 @@ const EmailPage = () => {
 
   return (
     <div className="container-fluid">
-    <MyNavbarMain />
-    <h1>Email Page</h1>
-    <form>
-    <div>
-        <label htmlFor="emailAddress">Email address:</label>
-        <input
-          type="text"
-          id="emailAddress"
-          className="form-control"
-          name="emailAddress"
-          value={emailData.emailAddress}
-          onChange={handleInputChange}
-        />
-      </div>
-      <div>
-        <label htmlFor="subject">Subject:</label>
-        <input
-          type="text"
-          id="subject"
-          className="form-control"
-          name="subject"
-          value={emailData.subject}
-          onChange={handleInputChange}
-        />
-      </div>
-      <div>
-        <label htmlFor="body">Body:</label>
-        <textarea
-          id="body"
-          name="body"
-          className="form-control"
-          value={emailData.body}
-          onChange={handleInputChange}
-        />
-      </div>
-      <button type="button" onClick={sendEmail} className="btn btn-primary">
-        Send Email
-      </button>
-      {alert && (
-        <div className={`alert alert-${alert.type}`} role="alert">
-          {alert.message}
-        </div>
-      )}
+      <MyNavbarMain />
+      <div className="container mt-4 pt-5">
+        <div className="form d-flex justify-content-center pt-5">
+          <form className="border border-info-subtle border-3 p-5 shadow">
+            <h1>Email Page</h1>
+            <div>
+              <label htmlFor="emailAddress">Email address:</label>
+              <input
+                type="text"
+                id="emailAddress"
+                className="form-control"
+                name="emailAddress"
+                value={emailData.emailAddress}
+                onChange={handleInputChange}
+              />
+            </div>
+            <div>
+              <label htmlFor="subject">Subject:</label>
+              <input
+                type="text"
+                id="subject"
+                className="form-control"
+                name="subject"
+                value={emailData.subject}
+                onChange={handleInputChange}
+              />
+            </div>
+            <div>
+              <label htmlFor="body">Body:</label>
+              <textarea
+                id="body"
+                name="body"
+                className="form-control"
+                value={emailData.body}
+                onChange={handleInputChange}
+              />
+            </div>
+            <button type="button" onClick={sendEmail} className="btn btn-primary mt-2">
+              Send Email
+            </button>
+            {alert && (
+              <div className={`alert alert-${alert.type}`} role="alert">
+                {alert.message}
+              </div>
+            )}
 
-    </form>
-  </div>
-);
+          </form>
+        </div>
+      </div>
+    </div>
+  );
 };
 
 
