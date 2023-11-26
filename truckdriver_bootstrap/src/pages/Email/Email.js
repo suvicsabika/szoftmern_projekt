@@ -15,6 +15,8 @@ const EmailPage = () => {
     setEmailData({ ...emailData, [e.target.name]: e.target.value });
   };
 
+  const [alert, setAlert] = useState(null);
+
   const sendEmail = async () => {
     try {
       const { subject, body } = emailData;
@@ -22,14 +24,14 @@ const EmailPage = () => {
 
       });
 
-      console.log('Email sent!', response.data);
+      setAlert({ type: 'success', message: 'Email sent successfully!' });
     } catch (error) {
-      console.error('Error sending email:', error);
+      setAlert({ type: 'danger', message: 'Error sending email. Please try again.' });
     }
   };
 
   return (
-    <div className="container">
+    <div className="container-fluid">
     <MyNavbarMain />
     <h1>Email Page</h1>
     <form>
@@ -68,6 +70,12 @@ const EmailPage = () => {
       <button type="button" onClick={sendEmail} className="btn btn-primary">
         Send Email
       </button>
+      {alert && (
+        <div className={`alert alert-${alert.type}`} role="alert">
+          {alert.message}
+        </div>
+      )}
+
     </form>
   </div>
 );

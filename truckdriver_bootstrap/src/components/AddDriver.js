@@ -18,9 +18,9 @@ export default function EditPerson() {
 
     axios.post('http://localhost:8081/driver/register', {
       "user": {
-        "username": "cameron",
-        "email": "pistageci",
-        "password": "anyad"
+        "username": "sample",
+        "email": "sample@gmail.com",
+        "password": "password"
       },
       "driver": {
         "name": name,
