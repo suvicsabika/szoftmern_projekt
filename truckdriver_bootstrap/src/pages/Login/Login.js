@@ -1,99 +1,56 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 import { MyNavbarMain } from '../../components';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
-export default function Login() {
-  const [users, setUsers] = React.useState([]);
-
-  const loadUsers = async () => {
-    const result = await axios.get('http://localhost:8081/driver/users');
-      
-    setUsers(result.data)
-    console.log(result.data)
-  }
-
-  const [errorMessages, setErrorMessages] = useState({});
-  const [isSubmitted, setIsSubmitted] = useState(false);
+const LoginForm = () => {
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState(null);
+  const [success, setSuccess] = useState(false);
 
   const navigate = useNavigate();
+  const [isSubmitted, setIsSubmitted] = React.useState(false);
 
-  const database = [
-    {
-      uname: "user1",
-      pass: "pass1",
-      isAdmin: "false"
-    },
-    {
-      uname: "user2",
-      pass: "pass2",
-      isAdmin: "false"
-    },
-    {
-      uname: "admin",
-      pass: "admin",
-      isAdmin: "true"
-    }
-  ];
+  const handleLogin = async (e) => {
+    e.preventDefault();
 
-  const errors = {
-    pass: "Helytelen belépési adatok!"
-  };
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-
-    const data = new FormData(event.target);
-    const uname = data.get("uname");
-    const pass = data.get("pass");
-    // const isAdmin = database.find((user) => user.pass === pass).isAdmin; //todo: admin csekkolas igaz v nem
-
-    console.log("uname: " + uname);
-    console.log("pass: " + pass);
-    
-    // axios.post('http://localhost:8081/driver/login/', {
-    //   "user": {
-    //     "username": uname, //todo: render validacio backendrol olvasva
-    //     "password": pass
-    //   },
-    // })
-
-    const userUname = database.find((user) => user.pass === pass);
-    const userPass = database.find((user) => user.pass === pass);
-
-    const isValidPass = userPass && userPass.pass === pass;
-    const isValidUname = userUname && userUname.uname === uname;
-
-    if (!isValidPass || !isValidUname) {
-      setErrorMessages({
-        name: "pass",
-        message: errors.pass
+    try {
+      const response = await axios.post('http://localhost:8081/driver/login/', {
+        "username": username,
+        "password": password,
       });
-      return;
-    }
-    localStorage.setItem("uname", uname);
-    localStorage.setItem("isAdmin", isAdmin);
-    setErrorMessages({});
-    setIsSubmitted(true);
-  };
 
-  const renderErrorMessage = (name) =>
-    name === errorMessages.name && (
-      <div className="error">{errorMessages.message}</div>
-    );
+      if (response.status === 200) {
+        setSuccess(true);
+        setError(null);
+        // You may perform additional actions based on the successful response
+      } else {
+        setSuccess(false);
+        setError('Login failed. Please check your credentials.');
+      }
+    } catch (error) {
+      console.error('Login failed:', error.response.data);
+      setSuccess(false);
+      setError('Login failed. Please check your credentials.');
+    }
+    setIsSubmitted(true);
+    localStorage.setItem("uname", username);
+  };
 
   const renderForm = (
     <div className="container mt-4 pt-5">
       <div className="form d-flex justify-content-center pt-5">
-        <form className="border border-info-subtle border-3 p-5 shadow" onSubmit={handleSubmit}>
+        <form className="border border-info-subtle border-3 p-5 shadow" onSubmit={handleLogin}>
           <h3 className="text-center pb-3">Bejelentkezés</h3>
           <div className="mb-3">
             <label >Felhasználónév</label>
             <input
               type="text"
               className="form-control"
-
-              name="uname"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
               placeholder="Felhasználónév"
               required
             />
@@ -104,12 +61,13 @@ export default function Login() {
               type="password"
               className="form-control"
               placeholder="Jelszó"
-              name="pass"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
               required
             />
-            {renderErrorMessage("pass")}
           </div>
-
+          {error && <div style={{ color: 'red' }}>{error}</div>}
+          {success && <div style={{ color: 'green' }}>Login successful!</div>}
           <div className="d-grid">
             <button type="submit" className="btn btn-primary">
               Küldés
@@ -133,4 +91,6 @@ export default function Login() {
       </div>
     </div>
   );
-}
+};
+
+export default LoginForm;

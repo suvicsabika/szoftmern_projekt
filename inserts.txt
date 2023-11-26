@@ -6,3 +6,7 @@ values('25.5','6', 'MAN', 'DIESEL', 'FASZ-123');
 
 insert into users(IS_ADMIN ,EMAIL ,PASSWORD ,USERNAME )
 values(false,'anyad@gmail.com','123456','admin3');
+
+
+kötvál: 6 3 3 3 = 15
+szabvál: 2 2 2matek = 6
