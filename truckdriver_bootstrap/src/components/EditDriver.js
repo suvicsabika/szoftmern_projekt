@@ -5,6 +5,7 @@ import { useParams } from 'react-router-dom'
 
 export default function EditDriver() {
   const params = useParams(); // ez a hook kiszedi az id-t a linkből (ez arra kell, hogy tudjuk melyiket editelem és használjam a put-ot)
+  const [isSubmitted, setIsSubmitted] = React.useState(false);
 
   const [drivers, setDrivers] = React.useState([]);
   useEffect(() => {
@@ -38,26 +39,41 @@ export default function EditDriver() {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    const data = new FormData(event.target);
-    const name = data.get("name");
-    const address = data.get("address");
-    const phoneNumber = data.get("phoneNumber");
+    let data = new FormData(event.target);
+    let name = data.get("name");
+    let address = data.get("address");
+    let phoneNumber = data.get("phoneNumber");
     console.log(name);
     console.log(address);
     console.log(phoneNumber);
 
-    axios.put(`http://localhost:8081/driver/${params.id}`, { // a mapping még nem jó
-      "name": name,
-      "address": address,
-      "phoneNumber": phoneNumber
+    if(name === "") {
+      name = currentDriverName;
+    }
+    if(address === "") {
+      address = currentDriverAddress;
+    }
+    if(phoneNumber === "") {
+      phoneNumber = currentDriverPhoneNumber;
+    }
+
+    axios.put(`http://localhost:8081/driver/${params.id}`, {
+      "user": {
+        "username": "cameron",
+        "email": "szabika04@gmail.com",
+        "password": "anyadpicsaja"
+      },
+      "driver": {
+        "name": name,
+        "address": address,
+        "phoneNumber": phoneNumber
+      }
     })
+    setIsSubmitted(true);
   };
 
-
-  return (
-    <div>
-      <MyNavbarMain />
-      <div className='container mt-4 pt-5 d-flex justify-content-center'>
+  const renderForm = (
+    <div className='container mt-4 pt-5 d-flex justify-content-center'>
         <form
           className='border border-info-subtle border-3 p-5 shadow' onSubmit={handleSubmit}>
           <h1 className='text-center'>Edit Driver</h1>
@@ -86,9 +102,25 @@ export default function EditDriver() {
               placeholder={currentDriverPhoneNumber}
               id="phoneNumber" />
           </div>
-          <button type="submit" className="btn btn-primary">Submit</button>
+          <button type="submit" className="btn btn-primary mt-3">Submit</button>
         </form>
       </div>
+  );
+
+
+  return (
+    <div>
+      <MyNavbarMain />
+      
+      {isSubmitted ? (
+        <div className="container mt-4 pt-5 d-flex justify-content-center">
+          <div className="alert alert-success" role="alert">
+            A driver has been successfully edited!
+          </div>
+        </div>
+      ) : (
+        renderForm
+      )}
     </div>
   )
 }

@@ -6,20 +6,6 @@ import { Link, useNavigate } from 'react-router-dom';
 export default function Login() {
   const [users, setUsers] = React.useState([]);
 
-  let dataArray = []
-  useEffect(() => {
-    loadUsers()
-      // axios
-      //   .get("http://localhost:8081/driver/")
-      //   .then(res => {
-      //     const newItem = {
-      //       username: res.data.user.username,
-      //       name: res.data.driver.name,
-      //     };  
-      //     dataArray.push(newItem);
-      //   })
-  }, []);
-
   const loadUsers = async () => {
     const result = await axios.get('http://localhost:8081/driver/users');
       
@@ -57,19 +43,16 @@ export default function Login() {
     const data = new FormData(event.target);
     const uname = data.get("uname");
     const pass = data.get("pass");
-    //-------------------------------------------------------------------------------------------------------------//
-    // const userName_database = users.find((user) => user.driver.name === uname);
-    // const password_database = users.find((user) => user.user.username === pass);
-    //-------------------------------------------------------------------------------------------------------------//
 
     console.log("uname: " + uname);
     console.log("pass: " + pass);
-    //-------------------------------------------------------------------------------------------------------------//
-    // console.log("userName_database: " + userName_database);               ADATBÁZISBÓL KERESÉS
-    // console.log("password_database: " + password_database);
-    // const isValidPass_database = password_database && password_database.driver.name === pass;
-    // const isValidUname_database = userName_database && userName_database.user.username === uname;
-    //-------------------------------------------------------------------------------------------------------------//
+    
+    // axios.post('http://localhost:8081/driver/login/', {
+    //   "user": {
+    //     "username": uname, //todo: render validacio backendrol olvasva
+    //     "password": pass
+    //   },
+    // })
 
     const userUname = database.find((user) => user.pass === pass);
     const userPass = database.find((user) => user.pass === pass);

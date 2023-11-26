@@ -3,6 +3,8 @@ import { Collapse } from 'bootstrap'
 import { Link } from 'react-router-dom'
 import React, { useEffect } from 'react'
 import axios from 'axios'
+import dayjs from 'dayjs'
+import { CSVLink } from "react-csv";
 
 // axios.post('http://localhost:8081/driver/drivers', {
 //   "user": {
@@ -19,6 +21,11 @@ import axios from 'axios'
 
 export default function Records() {
 
+  const [isTruckLengthZero, setIsTruckLengthZero] = React.useState(false); //import csv gombhoz kell
+  const [isDriverLengthZero, setIsDriverLengthZero] = React.useState(false); //import csv gombhoz kell
+  const [isFreightLengthZero, setIsFreightLengthZero] = React.useState(false); //import csv gombhoz kell
+
+  // -----------------------------USE EFFECTEK-------------------------------------------
   const [drivers, setDrivers] = React.useState([]);
   useEffect(() => {
     loadDrivers()
@@ -33,37 +40,74 @@ export default function Records() {
   useEffect(() => {
     loadTrucks()
   }, []);
+  // -----------------------------USE EFFECTEK-------------------------------------------
 
+
+  // -----------------------------LOAD FÜGGVÉNYEK-------------------------------------------  
   const loadFreights = async () => {
     const result = await axios.get('http://localhost:8081/freight/');
     setFreights(result.data)
     console.log(result.data)
+    if (result.data.length === 0) {
+      setIsFreightLengthZero(true);
+      return 0;
+    }
   }
 
   const loadDrivers = async () => {
     const result = await axios.get('http://localhost:8081/driver/drivers');
-    if(result.data.length === 0) {
-      return;
-    }
     setDrivers(result.data)
     console.log(result.data)
+    if (result.data.length === 0) {
+      setIsDriverLengthZero(true);
+      return 0;
+    }
   }
 
   const loadTrucks = async () => {
     const result = await axios.get('http://localhost:8081/truck');
     setTrucks(result.data)
     console.log(result.data)
+    if (result.data.length === 0) {
+      setIsTruckLengthZero(true);
+      return 0;
+    }
   }
-
+  // -----------------------------LOAD FÜGGVÉNYEK------------------------------------------- 
+  
+  // -----------------------------DELETE FÜGGVÉNYEK---------------------------------------
   const deleteDriver = async (id) => {
     await axios.delete(`http://localhost:8081/driver/${id}`);
     loadDrivers();
   }
 
+  const deleteFreight = async (id) => {
+    await axios.delete(`http://localhost:8081/freight/${id}`);
+    loadFreights();
+  }
+
+  const deleteTruck = async (id) => {
+    await axios.delete(`http://localhost:8081/truck/${id}`);
+    loadTrucks();
+  }
+  // -----------------------------DELETE FÜGGVÉNYEK---------------------------------------
+
+  // -----------------------------TIME FORMAT FÜGGVÉNYEK---------------------------------------
+  const arrivalTimeFormat = freights.map((freight) => {              //FREIGHTS.ARRIVALTIME FORMATJA
+    return dayjs(freight.arrivalTime).format("YYYY-MM-DD");
+  })
+  console.log("arrival: " + arrivalTimeFormat); 
+
+  
+  const startTimeFormat = freights.map((freight) => {              //FREIGHTS.startTime FORMATJA
+    return dayjs(freight.startTime).format("YYYY-MM-DD");
+  })
+  console.log("arrival: " + startTimeFormat); 
+  // -----------------------------TIME FORMAT FÜGGVÉNYEK---------------------------------------
+  
   return (
     <div>
       <MyNavbarMain />
-
       <div class="container mt-4">
         <div class="accordion" id="accordionExample">
           <div class="accordion-item">
@@ -102,6 +146,7 @@ export default function Records() {
 
                   </tbody>
                 </table>
+                {isDriverLengthZero ? <div></div> : <CSVLink data={drivers} className='btn btn-success csv-button'>Import to .csv</CSVLink>}
               </div>
             </div>
           </div>
@@ -117,6 +162,7 @@ export default function Records() {
                   <table class="table table-striped table-bordered mt-4">
                     <thead className='table-primary'>
                       <tr>
+                        <th scope="col">Index</th>
                         <th scope="col">Arrival Time</th>
                         <th scope="col">Driver ID</th>
                         <th scope="col">Freight ID</th>
@@ -124,27 +170,28 @@ export default function Records() {
                         <th scope="col">Cargo</th>
                         <th scope="col">Destination</th>
                         <th scope="col">Origin</th>
+                        <th scope="col"></th>
                       </tr>
                     </thead>
                     <tbody>
                       {freights.map((freight, index) => (
                         <tr>
                           <td>{index}</td>
-                          <td>{freight.arrivalTime}</td>
+                          <td>{arrivalTimeFormat[index]}</td>
                           <td>{freight.driverId}</td>
                           <td>{freight.freightId}</td>
-                          <td>{freight.startTime}</td>
+                          <td>{startTimeFormat[index]}</td>
+                          <td>{freight.cargo}</td>
                           <td>{freight.destination}</td>
                           <td>{freight.origin}</td>
                           <td>
-                            <Link to={`/Editdriver/${freight.driverId}`} type="button" class="btn btn-primary me-2">Edit</Link>
-                            <button type="button" class="btn btn-danger">Delete</button>
-                        </td>
+                            <button type="button" class="btn btn-danger ms-1" onClick={() => deleteFreight(freight.freightId)}>Delete</button>
+                          </td>
                         </tr>
-                      ))}
-
+                      ))}                      
                     </tbody>
                   </table>
+                  {isFreightLengthZero ? <div></div> : <CSVLink data={freights} className='btn btn-success csv-button'>Import to .csv</CSVLink>}
                 </div>
               </div>
             </div>
@@ -167,6 +214,7 @@ export default function Records() {
                         <th scope="col">Brand</th>
                         <th scope="col">Fuel Type</th>
                         <th scope="col">Plate Number</th>
+                        <th scope="col"></th>
                       </tr>
                     </thead>
                     <tbody>
@@ -179,13 +227,13 @@ export default function Records() {
                           <td>{truck.fuelType}</td>
                           <td>{truck.plateNumber}</td>
                           <td>
-                          <Link to={`/Editdriver/${truck.driverId}`} type="button" class="btn btn-primary me-2">Edit</Link>
-                            <button type="button" class="btn btn-danger">Delete</button>
+                            <button type="button" className="btn btn-danger ms-2" onClick={() => deleteTruck(truck.vehicleId)}>Delete</button>
                         </td>
                         </tr>
                       ))}
                     </tbody>
                   </table>
+                  {isTruckLengthZero ? <div></div> : <CSVLink data={trucks} className='btn btn-success csv-button'>Import to .csv</CSVLink>}
                 </div>
               </div>
             </div>
